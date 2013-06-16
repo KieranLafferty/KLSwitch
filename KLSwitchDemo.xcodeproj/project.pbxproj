@@ -1,0 +1,469 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7710F532176DEAF200771BA7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7710F531176DEAF200771BA7 /* UIKit.framework */; };
+		7710F534176DEAF200771BA7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7710F533176DEAF200771BA7 /* Foundation.framework */; };
+		7710F536176DEAF200771BA7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7710F535176DEAF200771BA7 /* CoreGraphics.framework */; };
+		7710F53C176DEAF200771BA7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7710F53A176DEAF200771BA7 /* InfoPlist.strings */; };
+		7710F53E176DEAF200771BA7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7710F53D176DEAF200771BA7 /* main.m */; };
+		7710F542176DEAF200771BA7 /* KLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7710F541176DEAF200771BA7 /* KLAppDelegate.m */; };
+		7710F544176DEAF200771BA7 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7710F543176DEAF200771BA7 /* Default.png */; };
+		7710F546176DEAF200771BA7 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7710F545176DEAF200771BA7 /* Default@2x.png */; };
+		7710F548176DEAF200771BA7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7710F547176DEAF200771BA7 /* Default-568h@2x.png */; };
+		7710F54B176DEAF200771BA7 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7710F549176DEAF200771BA7 /* MainStoryboard.storyboard */; };
+		7710F54E176DEAF200771BA7 /* KLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7710F54D176DEAF200771BA7 /* KLViewController.m */; };
+		7710F556176DEAF200771BA7 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7710F555176DEAF200771BA7 /* SenTestingKit.framework */; };
+		7710F557176DEAF200771BA7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7710F531176DEAF200771BA7 /* UIKit.framework */; };
+		7710F558176DEAF200771BA7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7710F533176DEAF200771BA7 /* Foundation.framework */; };
+		7710F560176DEAF200771BA7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7710F55E176DEAF200771BA7 /* InfoPlist.strings */; };
+		7710F563176DEAF200771BA7 /* KLSwitchDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7710F562176DEAF200771BA7 /* KLSwitchDemoTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7710F559176DEAF200771BA7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7710F526176DEAF200771BA7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7710F52D176DEAF200771BA7;
+			remoteInfo = KLSwitchDemo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		7710F52E176DEAF200771BA7 /* KLSwitchDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KLSwitchDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7710F531176DEAF200771BA7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		7710F533176DEAF200771BA7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		7710F535176DEAF200771BA7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		7710F539176DEAF200771BA7 /* KLSwitchDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KLSwitchDemo-Info.plist"; sourceTree = "<group>"; };
+		7710F53B176DEAF200771BA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7710F53D176DEAF200771BA7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		7710F53F176DEAF200771BA7 /* KLSwitchDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KLSwitchDemo-Prefix.pch"; sourceTree = "<group>"; };
+		7710F540176DEAF200771BA7 /* KLAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KLAppDelegate.h; sourceTree = "<group>"; };
+		7710F541176DEAF200771BA7 /* KLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KLAppDelegate.m; sourceTree = "<group>"; };
+		7710F543176DEAF200771BA7 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		7710F545176DEAF200771BA7 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		7710F547176DEAF200771BA7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		7710F54A176DEAF200771BA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		7710F54C176DEAF200771BA7 /* KLViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KLViewController.h; sourceTree = "<group>"; };
+		7710F54D176DEAF200771BA7 /* KLViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KLViewController.m; sourceTree = "<group>"; };
+		7710F554176DEAF200771BA7 /* KLSwitchDemoTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KLSwitchDemoTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7710F555176DEAF200771BA7 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		7710F55D176DEAF200771BA7 /* KLSwitchDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KLSwitchDemoTests-Info.plist"; sourceTree = "<group>"; };
+		7710F55F176DEAF200771BA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7710F561176DEAF200771BA7 /* KLSwitchDemoTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KLSwitchDemoTests.h; sourceTree = "<group>"; };
+		7710F562176DEAF200771BA7 /* KLSwitchDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KLSwitchDemoTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7710F52B176DEAF200771BA7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7710F532176DEAF200771BA7 /* UIKit.framework in Frameworks */,
+				7710F534176DEAF200771BA7 /* Foundation.framework in Frameworks */,
+				7710F536176DEAF200771BA7 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7710F550176DEAF200771BA7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7710F556176DEAF200771BA7 /* SenTestingKit.framework in Frameworks */,
+				7710F557176DEAF200771BA7 /* UIKit.framework in Frameworks */,
+				7710F558176DEAF200771BA7 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7710F525176DEAF200771BA7 = {
+			isa = PBXGroup;
+			children = (
+				7710F537176DEAF200771BA7 /* KLSwitchDemo */,
+				7710F55B176DEAF200771BA7 /* KLSwitchDemoTests */,
+				7710F530176DEAF200771BA7 /* Frameworks */,
+				7710F52F176DEAF200771BA7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7710F52F176DEAF200771BA7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7710F52E176DEAF200771BA7 /* KLSwitchDemo.app */,
+				7710F554176DEAF200771BA7 /* KLSwitchDemoTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7710F530176DEAF200771BA7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7710F531176DEAF200771BA7 /* UIKit.framework */,
+				7710F533176DEAF200771BA7 /* Foundation.framework */,
+				7710F535176DEAF200771BA7 /* CoreGraphics.framework */,
+				7710F555176DEAF200771BA7 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7710F537176DEAF200771BA7 /* KLSwitchDemo */ = {
+			isa = PBXGroup;
+			children = (
+				7710F540176DEAF200771BA7 /* KLAppDelegate.h */,
+				7710F541176DEAF200771BA7 /* KLAppDelegate.m */,
+				7710F549176DEAF200771BA7 /* MainStoryboard.storyboard */,
+				7710F54C176DEAF200771BA7 /* KLViewController.h */,
+				7710F54D176DEAF200771BA7 /* KLViewController.m */,
+				7710F538176DEAF200771BA7 /* Supporting Files */,
+			);
+			path = KLSwitchDemo;
+			sourceTree = "<group>";
+		};
+		7710F538176DEAF200771BA7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7710F539176DEAF200771BA7 /* KLSwitchDemo-Info.plist */,
+				7710F53A176DEAF200771BA7 /* InfoPlist.strings */,
+				7710F53D176DEAF200771BA7 /* main.m */,
+				7710F53F176DEAF200771BA7 /* KLSwitchDemo-Prefix.pch */,
+				7710F543176DEAF200771BA7 /* Default.png */,
+				7710F545176DEAF200771BA7 /* Default@2x.png */,
+				7710F547176DEAF200771BA7 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7710F55B176DEAF200771BA7 /* KLSwitchDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				7710F561176DEAF200771BA7 /* KLSwitchDemoTests.h */,
+				7710F562176DEAF200771BA7 /* KLSwitchDemoTests.m */,
+				7710F55C176DEAF200771BA7 /* Supporting Files */,
+			);
+			path = KLSwitchDemoTests;
+			sourceTree = "<group>";
+		};
+		7710F55C176DEAF200771BA7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7710F55D176DEAF200771BA7 /* KLSwitchDemoTests-Info.plist */,
+				7710F55E176DEAF200771BA7 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7710F52D176DEAF200771BA7 /* KLSwitchDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7710F566176DEAF200771BA7 /* Build configuration list for PBXNativeTarget "KLSwitchDemo" */;
+			buildPhases = (
+				7710F52A176DEAF200771BA7 /* Sources */,
+				7710F52B176DEAF200771BA7 /* Frameworks */,
+				7710F52C176DEAF200771BA7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KLSwitchDemo;
+			productName = KLSwitchDemo;
+			productReference = 7710F52E176DEAF200771BA7 /* KLSwitchDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		7710F553176DEAF200771BA7 /* KLSwitchDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7710F569176DEAF200771BA7 /* Build configuration list for PBXNativeTarget "KLSwitchDemoTests" */;
+			buildPhases = (
+				7710F54F176DEAF200771BA7 /* Sources */,
+				7710F550176DEAF200771BA7 /* Frameworks */,
+				7710F551176DEAF200771BA7 /* Resources */,
+				7710F552176DEAF200771BA7 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7710F55A176DEAF200771BA7 /* PBXTargetDependency */,
+			);
+			name = KLSwitchDemoTests;
+			productName = KLSwitchDemoTests;
+			productReference = 7710F554176DEAF200771BA7 /* KLSwitchDemoTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7710F526176DEAF200771BA7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = KL;
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Kieran Lafferty";
+			};
+			buildConfigurationList = 7710F529176DEAF200771BA7 /* Build configuration list for PBXProject "KLSwitchDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7710F525176DEAF200771BA7;
+			productRefGroup = 7710F52F176DEAF200771BA7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7710F52D176DEAF200771BA7 /* KLSwitchDemo */,
+				7710F553176DEAF200771BA7 /* KLSwitchDemoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7710F52C176DEAF200771BA7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7710F53C176DEAF200771BA7 /* InfoPlist.strings in Resources */,
+				7710F544176DEAF200771BA7 /* Default.png in Resources */,
+				7710F546176DEAF200771BA7 /* Default@2x.png in Resources */,
+				7710F548176DEAF200771BA7 /* Default-568h@2x.png in Resources */,
+				7710F54B176DEAF200771BA7 /* MainStoryboard.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7710F551176DEAF200771BA7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7710F560176DEAF200771BA7 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7710F552176DEAF200771BA7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7710F52A176DEAF200771BA7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7710F53E176DEAF200771BA7 /* main.m in Sources */,
+				7710F542176DEAF200771BA7 /* KLAppDelegate.m in Sources */,
+				7710F54E176DEAF200771BA7 /* KLViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7710F54F176DEAF200771BA7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7710F563176DEAF200771BA7 /* KLSwitchDemoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7710F55A176DEAF200771BA7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7710F52D176DEAF200771BA7 /* KLSwitchDemo */;
+			targetProxy = 7710F559176DEAF200771BA7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		7710F53A176DEAF200771BA7 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7710F53B176DEAF200771BA7 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		7710F549176DEAF200771BA7 /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7710F54A176DEAF200771BA7 /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+		7710F55E176DEAF200771BA7 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7710F55F176DEAF200771BA7 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7710F564176DEAF200771BA7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		7710F565176DEAF200771BA7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7710F567176DEAF200771BA7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "KLSwitchDemo/KLSwitchDemo-Prefix.pch";
+				INFOPLIST_FILE = "KLSwitchDemo/KLSwitchDemo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		7710F568176DEAF200771BA7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "KLSwitchDemo/KLSwitchDemo-Prefix.pch";
+				INFOPLIST_FILE = "KLSwitchDemo/KLSwitchDemo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		7710F56A176DEAF200771BA7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/KLSwitchDemo.app/KLSwitchDemo";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "KLSwitchDemo/KLSwitchDemo-Prefix.pch";
+				INFOPLIST_FILE = "KLSwitchDemoTests/KLSwitchDemoTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		7710F56B176DEAF200771BA7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/KLSwitchDemo.app/KLSwitchDemo";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "KLSwitchDemo/KLSwitchDemo-Prefix.pch";
+				INFOPLIST_FILE = "KLSwitchDemoTests/KLSwitchDemoTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7710F529176DEAF200771BA7 /* Build configuration list for PBXProject "KLSwitchDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7710F564176DEAF200771BA7 /* Debug */,
+				7710F565176DEAF200771BA7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7710F566176DEAF200771BA7 /* Build configuration list for PBXNativeTarget "KLSwitchDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7710F567176DEAF200771BA7 /* Debug */,
+				7710F568176DEAF200771BA7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		7710F569176DEAF200771BA7 /* Build configuration list for PBXNativeTarget "KLSwitchDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7710F56A176DEAF200771BA7 /* Debug */,
+				7710F56B176DEAF200771BA7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7710F526176DEAF200771BA7 /* Project object */;
+}
