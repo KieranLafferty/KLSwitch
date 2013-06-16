@@ -21,8 +21,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [KLSwitch class];
-	// Do any additional setup after loading the view, typically from a nib.
+    [KLSwitch class]; //Required for the class to be linked properly when only linked through IB
+
+    
     [self.smallestSwitch setOnTintColor: kGreenColor];
     [self.smallSwitch setOnTintColor: kBlueColor];
     [self.mediumSwitch setOnTintColor: kYellowColor];
