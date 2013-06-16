@@ -12,7 +12,9 @@ Requires ARC
     <a class="macbuildserver-button" href="http://macbuildserver.com/project/github/build/?xcode_project=KLSwitchDemo.xcodeproj&amp;target=KLSwitchDemo&amp;repo_url=https%3A%2F%2Fgithub.com%2FKieranLafferty%2FKLSwitch.git&amp;build_conf=Release" target="_blank"><img src="http://com.macbuildserver.github.s3-website-us-east-1.amazonaws.com/button_up.png"/></a><br/><sup><a href="http://macbuildserver.com/github/opensource/" target="_blank">by MacBuildServer</a></sup>
 </div>
 <!-- MacBuildServer Install Button -->
-
+## Goal ##
+1. Create the iOS 7 UISwitch to be compatible with iOS 5+
+2. Create a drop in replacement for UISwitch
 
 
 ## Installation ##
@@ -28,8 +30,21 @@ Via CocoaPods
 Add the following line to your podfile
 
 	pod 'KLSwitch', :git=>'git://github.com/KieranLafferty/KLSwitch.git'
+	
 ## Usage ##
+Interface is exactly the same as for the regular UISwitch you know and love (http://developer.apple.com/library/ios/#documentation/uikit/reference/UISwitch_Class/Reference/Reference.html)
 
+Added an event handler block to recieve state changes when the switch is toggled on/off which can be set as follows:
+
+	mySwitch.didChangeHandler = ^(BOOL isOn) {
+		//Do something useful with it here
+	}
+	
+Or it can be set using the custom initializer
+	- (id)initWithFrame:(CGRect)frame
+	   didChangeHandler:(changeHandler) didChangeHandler;
+	   
+	   
 See Demo project for sample usage using Interface Builder
 
 
