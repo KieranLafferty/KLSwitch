@@ -8,34 +8,44 @@
 
 #import "KLSwitch.h"
 
-#define kSwitchTrackOnColor     [UIColor colorWithRed:83/255.0 green: 214/255.0 blue: 105/255.0 alpha: 1]
-#define kSwitchTrackOffColor    [UIColor colorWithWhite: 0.9 alpha:1.0]
-#define kSwitchTrackContrastColor [UIColor whiteColor]
+//Appearance Defaults - Colors
+//Track Colors
+#define kDefaultTrackOnColor     [UIColor colorWithRed:83/255.0 green: 214/255.0 blue: 105/255.0 alpha: 1]
+#define kDefaultTrackOffColor    [UIColor colorWithWhite: 0.9 alpha:1.0]
+#define kDefaultTrackContrastColor [UIColor whiteColor]
 
-#define kDefaultSwitchBorderWidth 2.0
+//Thumb Colors
+#define kDefaultThumbTintColor [UIColor whiteColor]
+#define kDefaultThumbBorderColor [UIColor colorWithWhite: 0.9 alpha:1.0]
+
+//Appearance - Layout
+
 //Size of knob with respect to the control - Must be a multiple of 2
 #define kKnobOffset 2.0
-#define kKnobTrackingGrowthRatio 1.2
+#define kKnobTrackingGrowthRatio 1.2                //Amount to grow the thumb on press down
 
-#define kDefaultAnimationScaleLength 0.10
-#define kDefaultAnimationSlideLength 0.20
-#define kDefaultAnimationThumbGrowLength 0.20
 
-#define kSwitchTrackContrastViewShrinkFactor 0.00
+//Appearance - Animations
+#define kDefaultAnimationScaleLength 0.10           //Length of time for the thumb to grow on press down
+#define kDefaultAnimationSlideLength 0.25           //Length of time to slide the thumb from left/right to right/left
+
+#define kSwitchTrackContrastViewShrinkFactor 0.00   
 @interface KLSwitch () <UIGestureRecognizerDelegate>
 @property (nonatomic, strong) KLSwitchTrack* track;
-@property (nonatomic, strong) KLSwitchKnob* trackingKnob;
+@property (nonatomic, strong) KLSwitchKnob* thumb;
 
 //Gesture Recognizers
 @property (nonatomic, strong) UIPanGestureRecognizer* panGesture;
 @property (nonatomic, strong) UITapGestureRecognizer* tapGesture;
-
 -(void) configureSwitch;
 -(void) initializeDefaults;
 -(void) toggleState;
 @end
 
 @implementation KLSwitch
+
+#pragma mark - Initializers
+
 - (id)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super initWithCoder: aDecoder]) {
         [self configureSwitch];
@@ -57,10 +67,15 @@
     }
     return self;
 }
+
+#pragma mark - Defaults and layout/appearance
+
 -(void) initializeDefaults {
-    self.onColor = kSwitchTrackOnColor;
-    self.onTintColor = kSwitchTrackOnColor;
-    self.tintColor = kSwitchTrackOffColor;
+    self.onTintColor = kDefaultTrackOnColor;
+    self.tintColor = kDefaultTrackOffColor;
+    self.thumbTintColor = kDefaultThumbTintColor;
+    self.thumbBorderColor = kDefaultThumbBorderColor;
+    self.contrastColor = kDefaultThumbTintColor;
 }
 -(void) configureSwitch {
     [self initializeDefaults];
@@ -102,60 +117,61 @@
         _track = [[KLSwitchTrack alloc] initWithFrame: self.bounds
                                               onColor: self.onTintColor
                                              offColor: self.tintColor
-                                        contrastColor: kSwitchTrackContrastColor];
+                                        contrastColor: self.contrastColor];
         [_track setOn: self.isOn
              animated: NO];
         [self addSubview: self.track];
     }
-    if (!_trackingKnob) {
-        _trackingKnob = [[KLSwitchKnob alloc] initWithParentSwitch: self];
-        [_trackingKnob setParentSwitch: self];
-        [_trackingKnob setBackgroundColor: self.thumbTintColor];
-        [self addSubview: self.trackingKnob];
+    if (!_thumb) {
+        _thumb = [[KLSwitchKnob alloc] initWithParentSwitch: self];
+        [_thumb setParentSwitch: self];
+        [_thumb setBackgroundColor: self.thumbTintColor];
+        [self addSubview: _thumb];
     }
 }
 -(void) setOnTintColor:(UIColor *)onTintColor {
     _onTintColor = onTintColor;
-    [self.track setOnTintColor: onTintColor];
+    [self.track setOnTintColor: _onTintColor];
 }
 -(void) setTintColor:(UIColor *)tintColor {
     _tintColor = tintColor;
-    [self.track setTintColor: tintColor];
+    [self.track setTintColor: _tintColor];
 }
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
+-(void) setContrastColor:(UIColor *)contrastColor {
+    _contrastColor = contrastColor;
+    [self.track setContrastColor: _contrastColor];
+}
+-(void) setThumbBorderColor:(UIColor *)thumbBorderColor {
+    _thumbBorderColor = thumbBorderColor;
+    [self.thumb.layer setBorderColor: [_thumbBorderColor CGColor]];
+}
 - (void)drawRect:(CGRect)rect
 {
     // Drawing code
     //[self.trackingKnob setTintColor: self.thumbTintColor];
-    [self.trackingKnob setBackgroundColor: [UIColor whiteColor]];
+    [self.thumb setBackgroundColor: [UIColor whiteColor]];
     
     //Make the knob a circle and add a shadow
-    CGFloat roundedCornerRadius = self.trackingKnob.frame.size.height/2.0;
-    [self.trackingKnob.layer setBorderWidth: 0.5];
-    [self.trackingKnob.layer setBorderColor: [kSwitchTrackOffColor CGColor]];
-    [self.trackingKnob.layer setCornerRadius: roundedCornerRadius];
-    [self.trackingKnob.layer setShadowColor: [[UIColor grayColor] CGColor]];
-    [self.trackingKnob.layer setShadowOffset: CGSizeMake(0, 4)];
-    [self.trackingKnob.layer setShadowOpacity: 0.60];
-    [self.trackingKnob.layer setShadowRadius: 1.0];
+    CGFloat roundedCornerRadius = self.thumb.frame.size.height/2.0;
+    [self.thumb.layer setBorderWidth: 0.5];
+    [self.thumb.layer setBorderColor: [self.thumbBorderColor CGColor]];
+    [self.thumb.layer setCornerRadius: roundedCornerRadius];
+    [self.thumb.layer setShadowColor: [[UIColor grayColor] CGColor]];
+    [self.thumb.layer setShadowOffset: CGSizeMake(0, 4)];
+    [self.thumb.layer setShadowOpacity: 0.60];
+    [self.thumb.layer setShadowRadius: 1.0];
 }
 
--(void) toggleState {
-    [self setOn: self.isOn ? NO : YES
-       animated: YES];
-}
-
+#pragma mark - UIGestureRecognizer implementations
 -(void) didTap:(UITapGestureRecognizer*) gesture {
     if (gesture.state == UIGestureRecognizerStateEnded) {
         [self toggleState];
     }
-
 }
 -(void) didDrag:(UIPanGestureRecognizer*) gesture {
     if (gesture.state == UIGestureRecognizerStateBegan) {
         //Grow the thumb horizontally towards center by defined ratio
-        [self.trackingKnob setIsTracking: YES
+        [self.thumb setIsTracking: YES
                                 animated: YES];
     }
     else if (gesture.state == UIGestureRecognizerStateChanged) {
@@ -176,27 +192,25 @@
             [self sendActionsForControlEvents:UIControlEventTouchDragOutside];
     }
     else  if (gesture.state == UIGestureRecognizerStateEnded) {
-        [self.trackingKnob setIsTracking: NO
+        [self.thumb setIsTracking: NO
                                 animated: YES];
     }
 }
+
+#pragma mark - Event Handlers
+
+-(void) toggleState {
+    [self setOn: self.isOn ? NO : YES
+       animated: YES];
+}
+
 - (void)setOn:(BOOL)on animated:(BOOL)animated {
     [self setOn: on];
-    [self.trackingKnob setIsTracking:NO
+    [self.thumb setIsTracking:NO
                             animated: animated];
     if (animated) {
         [self.track setOn: on
                  animated: YES];
-
-        [UIView animateWithDuration:kDefaultAnimationSlideLength
-        delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-            if (self.isOn) {
-                [self.trackingKnob  setFrame: [self.trackingKnob frameForCurrentStateForSwitch:self]];
-            }
-            else {
-                [self.trackingKnob  setFrame: [self.trackingKnob frameForCurrentStateForSwitch: self]];
-            }
-        } completion: nil];
     }
 }
 - (void) setOn:(BOOL)on {
@@ -209,7 +223,7 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	[super touchesBegan:touches withEvent:event];
-    [self.trackingKnob setIsTracking:YES animated: YES];
+    [self.thumb setIsTracking:YES animated: YES];
 
     [self sendActionsForControlEvents:UIControlEventTouchDown];
 }
@@ -217,7 +231,7 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	[super touchesEnded:touches withEvent:event];
-    [self.trackingKnob setIsTracking:NO animated:YES];
+    [self.thumb setIsTracking:NO animated:YES];
 	[self sendActionsForControlEvents:UIControlEventTouchUpInside];
 }
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
@@ -225,7 +239,10 @@
 	[super touchesCancelled:touches withEvent:event];
 	[self sendActionsForControlEvents:UIControlEventTouchUpOutside];
 }
+
 @end
+
+
 @implementation KLSwitchKnob
 -(id) initWithParentSwitch:(KLSwitch*) parentSwitch {
     if (self = [super initWithFrame: [self frameForCurrentStateForSwitch: parentSwitch]]) {
@@ -248,8 +265,7 @@
 }
 -(void) setIsTracking:(BOOL)isTracking
              animated:(BOOL) animated {
-    
-    [UIView animateWithDuration: kDefaultAnimationThumbGrowLength
+    [UIView animateWithDuration: kDefaultAnimationScaleLength
                      animations:^{
                          [self setIsTracking: isTracking];
                      }];
@@ -303,7 +319,7 @@
         [self.layer setCornerRadius: cornerRadius];
         [_contrastView.layer setCornerRadius: cornerRadius];
         [self.layer setBorderWidth: 1.5];
-        [self.layer setBorderColor: [kSwitchTrackOffColor CGColor]];
+        [self.layer setBorderColor: [kDefaultTrackOffColor CGColor]];
         [self addSubview: _contrastView];
     }
     return self;
@@ -323,7 +339,7 @@
 -(void) setOn:(BOOL)on animated:(BOOL)animated {
     if (animated) {
         //First animate the color switch
-        [UIView animateWithDuration: 0.25
+        [UIView animateWithDuration: kDefaultAnimationSlideLength
                               delay: 0.0
                             options: UIViewAnimationOptionCurveEaseOut
                          animations:^{
