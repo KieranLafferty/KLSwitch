@@ -29,11 +29,11 @@
     [self.bigSwitch setOnTintColor: kOrangeColor];
     [self.biggestSwitch setOnTintColor: kRedColor];
     
-    [self.smallestSwitch setOn: NO
+    [self.smallestSwitch setOn: YES
                       animated: YES];
     [self.smallSwitch setOn: YES
                    animated: YES];
-    [self.mediumSwitch setOn: NO
+    [self.mediumSwitch setOn: YES
                     animated: YES];
     [self.bigSwitch setOn: YES
                  animated: YES];
