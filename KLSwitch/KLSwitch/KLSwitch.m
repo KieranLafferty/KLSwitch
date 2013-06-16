@@ -199,7 +199,6 @@
         } completion: nil];
     }
 }
-
 - (void) setOn:(BOOL)on {
     _on = on;
     if (self.didChangeHandler) {

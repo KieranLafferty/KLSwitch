@@ -22,7 +22,6 @@
 {
     [super viewDidLoad];
     [KLSwitch class]; //Required for the class to be linked properly when only linked through IB
-
     
     [self.smallestSwitch setOnTintColor: kGreenColor];
     [self.smallSwitch setOnTintColor: kBlueColor];
@@ -40,7 +39,6 @@
                  animated: YES];
     [self.biggestSwitch setOn: YES
                      animated: YES];
-    
 }
 
 - (void)didReceiveMemoryWarning

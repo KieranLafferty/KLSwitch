@@ -14,5 +14,4 @@
 @property (weak, nonatomic) IBOutlet KLSwitch *mediumSwitch;
 @property (weak, nonatomic) IBOutlet KLSwitch *bigSwitch;
 @property (weak, nonatomic) IBOutlet KLSwitch *biggestSwitch;
-
 @end
