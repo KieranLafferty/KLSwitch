@@ -9,47 +9,69 @@
             <objects>
                 <viewController id="2" customClass="KLViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oqd-MU-Xkf" customClass="KLSwitch">
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" type="user" id="Wbo-Zb-uJq"/>
+                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZeY-0U-SGh" customClass="KLSwitch">
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" type="user" id="LVq-tk-ruZ"/>
+                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K8X-fB-6v4" customClass="KLSwitch">
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" type="user" id="D8e-Qz-0PM"/>
+                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HQT-dA-FN4" customClass="KLSwitch">
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" type="user" id="Ose-6D-N1a"/>
+                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fHW-zE-9rl" customClass="KLSwitch">
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31" type="user" id="g1s-ho-8ft"/>
+                                </constraints>
                             </view>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="KLSwitch" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JGx-yd-gRw">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="65" id="Yep-KE-Tsw"/>
+                                    <constraint firstAttribute="width" constant="186" id="jFz-vX-KQL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="27"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="oqd-MU-Xkf" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="128" id="1aL-hY-Est"/>
                             <constraint firstItem="oqd-MU-Xkf" firstAttribute="centerX" secondItem="fHW-zE-9rl" secondAttribute="centerX" type="default" id="2th-HP-u0V"/>
-                            <constraint firstAttribute="bottom" secondItem="oqd-MU-Xkf" secondAttribute="bottom" constant="394" id="4Wm-n8-dBH"/>
+                            <constraint firstItem="JGx-yd-gRw" firstAttribute="top" secondItem="3" secondAttribute="top" constant="10" id="5yc-IT-NA7"/>
+                            <constraint firstItem="HQT-dA-FN4" firstAttribute="centerX" secondItem="K8X-fB-6v4" secondAttribute="centerX" type="default" id="78F-Mw-H1B"/>
                             <constraint firstItem="ZeY-0U-SGh" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="119" id="7hZ-xY-GPY"/>
-                            <constraint firstItem="HQT-dA-FN4" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="95" id="FUy-hz-ZYL"/>
-                            <constraint firstItem="HQT-dA-FN4" firstAttribute="top" secondItem="3" secondAttribute="top" constant="407" id="GMn-dO-DOh"/>
-                            <constraint firstItem="K8X-fB-6v4" firstAttribute="top" secondItem="3" secondAttribute="top" constant="291" id="J50-nT-m7R"/>
+                            <constraint firstItem="K8X-fB-6v4" firstAttribute="top" secondItem="ZeY-0U-SGh" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="Bu4-zt-VPw"/>
+                            <constraint firstItem="oqd-MU-Xkf" firstAttribute="top" secondItem="fHW-zE-9rl" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="FDk-rf-vFg"/>
                             <constraint firstItem="K8X-fB-6v4" firstAttribute="centerX" secondItem="ZeY-0U-SGh" secondAttribute="centerX" type="default" id="M3z-ae-dja"/>
-                            <constraint firstItem="K8X-fB-6v4" firstAttribute="centerX" secondItem="3" secondAttribute="centerX" type="default" id="SA6-uC-w2w"/>
+                            <constraint firstItem="JGx-yd-gRw" firstAttribute="top" relation="greaterThanOrEqual" secondItem="3" secondAttribute="top" constant="10" type="user" id="T4K-LD-STY"/>
                             <constraint firstItem="fHW-zE-9rl" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="135" id="UOb-pz-PPR"/>
                             <constraint firstItem="K8X-fB-6v4" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="111" id="W4p-BB-UjW"/>
-                            <constraint firstAttribute="bottom" secondItem="K8X-fB-6v4" secondAttribute="bottom" constant="197" id="WMh-k5-sEe"/>
-                            <constraint firstAttribute="bottom" secondItem="fHW-zE-9rl" secondAttribute="bottom" constant="468" id="Z4I-af-TWl"/>
-                            <constraint firstAttribute="bottom" secondItem="ZeY-0U-SGh" secondAttribute="bottom" constant="304" id="akw-2M-uah"/>
-                            <constraint firstItem="HQT-dA-FN4" firstAttribute="centerX" secondItem="K8X-fB-6v4" secondAttribute="centerX" type="default" id="bUa-pL-Git"/>
-                            <constraint firstItem="fHW-zE-9rl" firstAttribute="top" secondItem="3" secondAttribute="top" constant="49" id="cXZ-uG-aAw"/>
-                            <constraint firstItem="oqd-MU-Xkf" firstAttribute="top" secondItem="3" secondAttribute="top" constant="114" id="dXT-gk-ps6"/>
-                            <constraint firstAttribute="bottom" secondItem="HQT-dA-FN4" secondAttribute="bottom" constant="61" id="e93-Pb-Hv9"/>
+                            <constraint firstItem="HQT-dA-FN4" firstAttribute="top" secondItem="K8X-fB-6v4" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="aCA-AN-PXh"/>
+                            <constraint firstItem="JGx-yd-gRw" firstAttribute="centerX" secondItem="fHW-zE-9rl" secondAttribute="centerX" type="default" id="dtQ-Y6-dL7"/>
+                            <constraint firstItem="HQT-dA-FN4" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="95" id="fRz-sC-tWg"/>
+                            <constraint firstItem="fHW-zE-9rl" firstAttribute="top" secondItem="JGx-yd-gRw" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="iJy-9b-vBi"/>
+                            <constraint firstItem="ZeY-0U-SGh" firstAttribute="top" secondItem="oqd-MU-Xkf" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="iWe-KW-eRN"/>
                             <constraint firstItem="ZeY-0U-SGh" firstAttribute="centerX" secondItem="oqd-MU-Xkf" secondAttribute="centerX" type="default" id="sHC-3K-31M"/>
-                            <constraint firstItem="ZeY-0U-SGh" firstAttribute="top" secondItem="3" secondAttribute="top" constant="194" id="uel-sh-vdv"/>
+                            <constraint firstItem="JGx-yd-gRw" firstAttribute="centerX" secondItem="3" secondAttribute="centerX" type="default" id="zUj-zg-eyb"/>
                         </constraints>
                     </view>
                     <connections>
@@ -85,6 +107,6 @@
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
+        <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
 </document>
