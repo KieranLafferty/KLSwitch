@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <KLSwitch/KLSwitch.h>
 @interface KLViewController : UIViewController
+@property (weak, nonatomic) IBOutlet KLSwitch *smallestSwitch;
+@property (weak, nonatomic) IBOutlet KLSwitch *smallSwitch;
+@property (weak, nonatomic) IBOutlet KLSwitch *mediumSwitch;
+@property (weak, nonatomic) IBOutlet KLSwitch *bigSwitch;
+@property (weak, nonatomic) IBOutlet KLSwitch *biggestSwitch;
 
 @end

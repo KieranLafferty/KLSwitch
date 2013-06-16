@@ -23,6 +23,7 @@
 		7710F558176DEAF200771BA7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7710F533176DEAF200771BA7 /* Foundation.framework */; };
 		7710F560176DEAF200771BA7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7710F55E176DEAF200771BA7 /* InfoPlist.strings */; };
 		7710F563176DEAF200771BA7 /* KLSwitchDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7710F562176DEAF200771BA7 /* KLSwitchDemoTests.m */; };
+		7710F577176DEB2600771BA7 /* libKLSwitch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7710F572176DEB1700771BA7 /* libKLSwitch.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +33,27 @@
 			proxyType = 1;
 			remoteGlobalIDString = 7710F52D176DEAF200771BA7;
 			remoteInfo = KLSwitchDemo;
+		};
+		7710F571176DEB1700771BA7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7710F56C176DEB1700771BA7 /* KLSwitch.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7710F4F1176DE33900771BA7;
+			remoteInfo = KLSwitch;
+		};
+		7710F573176DEB1700771BA7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7710F56C176DEB1700771BA7 /* KLSwitch.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7710F502176DE33900771BA7;
+			remoteInfo = KLSwitchTests;
+		};
+		7710F575176DEB1E00771BA7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7710F56C176DEB1700771BA7 /* KLSwitch.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 7710F4F0176DE33900771BA7;
+			remoteInfo = KLSwitch;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -58,6 +80,7 @@
 		7710F55F176DEAF200771BA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7710F561176DEAF200771BA7 /* KLSwitchDemoTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KLSwitchDemoTests.h; sourceTree = "<group>"; };
 		7710F562176DEAF200771BA7 /* KLSwitchDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KLSwitchDemoTests.m; sourceTree = "<group>"; };
+		7710F56C176DEB1700771BA7 /* KLSwitch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KLSwitch.xcodeproj; path = KLSwitch/KLSwitch.xcodeproj; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7710F577176DEB2600771BA7 /* libKLSwitch.a in Frameworks */,
 				7710F532176DEAF200771BA7 /* UIKit.framework in Frameworks */,
 				7710F534176DEAF200771BA7 /* Foundation.framework in Frameworks */,
 				7710F536176DEAF200771BA7 /* CoreGraphics.framework in Frameworks */,
@@ -117,6 +141,7 @@
 		7710F537176DEAF200771BA7 /* KLSwitchDemo */ = {
 			isa = PBXGroup;
 			children = (
+				7710F56C176DEB1700771BA7 /* KLSwitch.xcodeproj */,
 				7710F540176DEAF200771BA7 /* KLAppDelegate.h */,
 				7710F541176DEAF200771BA7 /* KLAppDelegate.m */,
 				7710F549176DEAF200771BA7 /* MainStoryboard.storyboard */,
@@ -160,6 +185,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		7710F56D176DEB1700771BA7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7710F572176DEB1700771BA7 /* libKLSwitch.a */,
+				7710F574176DEB1700771BA7 /* KLSwitchTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -174,6 +208,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				7710F576176DEB1E00771BA7 /* PBXTargetDependency */,
 			);
 			name = KLSwitchDemo;
 			productName = KLSwitchDemo;
@@ -219,6 +254,12 @@
 			mainGroup = 7710F525176DEAF200771BA7;
 			productRefGroup = 7710F52F176DEAF200771BA7 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 7710F56D176DEB1700771BA7 /* Products */;
+					ProjectRef = 7710F56C176DEB1700771BA7 /* KLSwitch.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				7710F52D176DEAF200771BA7 /* KLSwitchDemo */,
@@ -226,6 +267,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		7710F572176DEB1700771BA7 /* libKLSwitch.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libKLSwitch.a;
+			remoteRef = 7710F571176DEB1700771BA7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7710F574176DEB1700771BA7 /* KLSwitchTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = KLSwitchTests.octest;
+			remoteRef = 7710F573176DEB1700771BA7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		7710F52C176DEAF200771BA7 /* Resources */ = {
@@ -292,6 +350,11 @@
 			isa = PBXTargetDependency;
 			target = 7710F52D176DEAF200771BA7 /* KLSwitchDemo */;
 			targetProxy = 7710F559176DEAF200771BA7 /* PBXContainerItemProxy */;
+		};
+		7710F576176DEB1E00771BA7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = KLSwitch;
+			targetProxy = 7710F575176DEB1E00771BA7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -454,6 +517,7 @@
 				7710F568176DEAF200771BA7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7710F569176DEAF200771BA7 /* Build configuration list for PBXNativeTarget "KLSwitchDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -462,6 +526,7 @@
 				7710F56B176DEAF200771BA7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
