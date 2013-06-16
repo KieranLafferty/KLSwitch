@@ -39,6 +39,7 @@
                  animated: YES];
     [self.biggestSwitch setOn: YES
                      animated: YES];
+    
 }
 
 - (void)didReceiveMemoryWarning
