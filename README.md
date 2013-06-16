@@ -1,7 +1,7 @@
 KLSwitch
 =======
 
-<img src="https://raw.github.com/KieranLafferty/KLNoteViewController/master/KLNoteViewController/Images/iPhoneScreenshot.png" width="50%"/>
+<img src="https://raw.github.com/KieranLafferty/KLNoteViewController/master/KLSwitch/Screenshot.png" width="50%"/>
 
 An iOS 7 UISwitch clone that works on iOS 5+
 
