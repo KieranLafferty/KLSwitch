@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.homepage     	= "http://www.cocoacontrols.com/platforms/ios/controls/klswitch"
   s.license      	= 'Apache 2.0'
   s.author       	= { "Kieran Lafferty" => "kieran.lafferty@gmail.com"}
-  s.source       	= { :git => "https://github.com/KieranLafferty/KLSwitch.git", :tag => "1.0" }
+  s.source       	= { :git => "https://github.com/KieranLafferty/KLSwitch.git", :commit => "713c9b89c4c55c11a046edb75672be79e326dc49" }
   s.source_files 	= 'KLSwitch/KLSwitch/*.{h,m}'
   s.requires_arc 	= true
   s.frameworks  	= 'QuartzCore'
