@@ -1,12 +1,11 @@
 KLSwitch
 =======
-
-<img src="https://raw.github.com/KieranLafferty/KLSwitch/master/Screenshot.png" width="50%"/>
-
 An iOS 7 UISwitch clone that works on iOS 5+
 
 Requires ARC
 
+
+<img src="https://raw.github.com/KieranLafferty/KLSwitch/master/Screenshot.png" width="50%"/>
 
 
 <!-- MacBuildServer Install Button -->
