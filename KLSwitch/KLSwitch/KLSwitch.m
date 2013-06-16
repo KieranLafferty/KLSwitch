@@ -155,7 +155,8 @@
 -(void) didDrag:(UIPanGestureRecognizer*) gesture {
     if (gesture.state == UIGestureRecognizerStateBegan) {
         //Grow the thumb horizontally towards center by defined ratio
-        [self.trackingKnob setIsTracking: YES];
+        [self.trackingKnob setIsTracking: YES
+                                animated: YES];
     }
     else if (gesture.state == UIGestureRecognizerStateChanged) {
         //If touch crosses a threshold then toggle the state
@@ -174,7 +175,10 @@
         else
             [self sendActionsForControlEvents:UIControlEventTouchDragOutside];
     }
-
+    else  if (gesture.state == UIGestureRecognizerStateEnded) {
+        [self.trackingKnob setIsTracking: NO
+                                animated: YES];
+    }
 }
 - (void)setOn:(BOOL)on animated:(BOOL)animated {
     [self setOn: on];
