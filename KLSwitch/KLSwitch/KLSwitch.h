@@ -40,13 +40,12 @@ typedef void(^changeHandler)(BOOL isOn);
 
 @interface KLSwitchKnob : UIView
 -(id) initWithParentSwitch:(KLSwitch*) parentSwitch;
--(CGRect) trackingFrameForSwitch;
--(CGRect) frameForCurrentStateForSwitch;
 -(void) setIsTracking:(BOOL)isTracking
              animated:(BOOL) animated;
 @property (nonatomic, weak) KLSwitch* parentSwitch;
 @property (nonatomic, assign) BOOL isTracking;
-
+-(CGRect) trackingFrameForSwitch:(KLSwitch*) parentSwitch;
+-(CGRect) frameForCurrentStateForSwitch:(KLSwitch*) parentSwitch;
 @end
 
 @interface KLSwitchTrack : UIView
