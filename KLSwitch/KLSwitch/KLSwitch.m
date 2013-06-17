@@ -27,8 +27,8 @@
 #define kDefaultPanActivationThreshold 0.7                    //Number between 0.0 - 1.0 describing how far user must drag before initiating the switch
 
 //Appearance - Animations
-#define kDefaultAnimationScaleLength 0.10           //Length of time for the thumb to grow on press down
 #define kDefaultAnimationSlideLength 0.25           //Length of time to slide the thumb from left/right to right/left
+#define kDefaultAnimationScaleLength 0.20           //Length of time for the thumb to grow on press down
 
 #define kSwitchTrackContrastViewShrinkFactor 0.0001     //Must be very low btu not 0 or else causes iOS 5 issuess
 
@@ -273,9 +273,15 @@
 -(void) setIsTracking:(BOOL)isTracking
              animated:(BOOL) animated {
     [UIView animateWithDuration: kDefaultAnimationScaleLength
-                     animations:^{
+                          delay: abs(kDefaultAnimationSlideLength - kDefaultAnimationScaleLength)
+                        options: UIViewAnimationOptionCurveEaseOut
+                     animations: ^{
                          [self setIsTracking: isTracking];
+                     }
+                     completion:^(BOOL finished) {
+         
                      }];
+
 }
 -(CGRect) trackingFrameForSwitch:(KLSwitch*) parentSwitch {
     //Round the scaled knob height to a multiple of 2
