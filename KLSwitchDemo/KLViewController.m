@@ -29,35 +29,35 @@
     [self.bigSwitch setOnTintColor: kOrangeColor];
     [self.biggestSwitch setOnTintColor: kRedColor];
     
-//    [self.smallestSwitch setOn: YES
-//                      animated: YES];
-//    [self.smallestSwitch setDidChangeHandler:^(BOOL isOn) {
-//        NSLog(@"Smallest switch changed to %d", isOn);
-//    }];
-//    
-//    [self.smallSwitch setOn: YES
-//                   animated: YES];
-//    [self.smallSwitch setDidChangeHandler:^(BOOL isOn) {
-//        NSLog(@"Small switch changed to %d", isOn);
-//    }];
-//    
-//    [self.mediumSwitch setOn: YES
-//                    animated: YES];
-//    [self.mediumSwitch setDidChangeHandler:^(BOOL isOn) {
-//        NSLog(@"Medium switch changed to %d", isOn);
-//    }];
-//    
-//    [self.bigSwitch setOn: YES
-//                 animated: YES];
-//    [self.bigSwitch setDidChangeHandler:^(BOOL isOn) {
-//        NSLog(@"Big switch changed to %d", isOn);
-//    }];
-//    
-//    [self.biggestSwitch setOn: YES
-//                     animated: YES];
-//    [self.biggestSwitch setDidChangeHandler:^(BOOL isOn) {
-//        NSLog(@"Biggest switch changed to %d", isOn);
-//    }];
+    [self.smallestSwitch setOn: YES
+                      animated: YES];
+    [self.smallestSwitch setDidChangeHandler:^(BOOL isOn) {
+        NSLog(@"Smallest switch changed to %d", isOn);
+    }];
+    
+    [self.smallSwitch setOn: YES
+                   animated: YES];
+    [self.smallSwitch setDidChangeHandler:^(BOOL isOn) {
+        NSLog(@"Small switch changed to %d", isOn);
+    }];
+    
+    [self.mediumSwitch setOn: YES
+                    animated: YES];
+    [self.mediumSwitch setDidChangeHandler:^(BOOL isOn) {
+        NSLog(@"Medium switch changed to %d", isOn);
+    }];
+    
+    [self.bigSwitch setOn: YES
+                 animated: YES];
+    [self.bigSwitch setDidChangeHandler:^(BOOL isOn) {
+        NSLog(@"Big switch changed to %d", isOn);
+    }];
+    
+    [self.biggestSwitch setOn: YES
+                     animated: YES];
+    [self.biggestSwitch setDidChangeHandler:^(BOOL isOn) {
+        NSLog(@"Biggest switch changed to %d", isOn);
+    }];
 }
 
 @end
