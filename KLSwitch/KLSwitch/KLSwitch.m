@@ -258,15 +258,13 @@
     return self;
 }
 -(void) setIsTracking:(BOOL)isTracking {
-    if (self.isTracking != isTracking) {
-        if (isTracking) {
-            //Grow
-            [self setFrame: [self trackingFrameForSwitch: self.parentSwitch]];
-        }
-        else {
-            //Shrink
-            [self setFrame: [self frameForCurrentStateForSwitch: self.parentSwitch]];
-        }
+    if (isTracking) {
+        //Grow
+        [self setFrame: [self trackingFrameForSwitch: self.parentSwitch]];
+    }
+    else {
+        //Shrink
+        [self setFrame: [self frameForCurrentStateForSwitch: self.parentSwitch]];
     }
     _isTracking = isTracking;
 }
