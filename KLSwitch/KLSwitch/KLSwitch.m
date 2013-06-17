@@ -31,6 +31,7 @@
 #define kDefaultAnimationSlideLength 0.25           //Length of time to slide the thumb from left/right to right/left
 
 #define kSwitchTrackContrastViewShrinkFactor 0.00   
+
 @interface KLSwitch () <UIGestureRecognizerDelegate>
 @property (nonatomic, strong) KLSwitchTrack* track;
 @property (nonatomic, strong) KLSwitchKnob* thumb;

@@ -51,20 +51,29 @@ See Demo project for sample usage using Interface Builder
 ## Config ##
 The visual appearance can be tweaked by changing the constants in <code>KLNoteViewController.m</code>:
 
-	#define kSwitchTrackOnColor     [UIColor colorWithRed:83/255.0 green: 214/255.0 blue: 105/255.0 alpha: 1]
-	#define kSwitchTrackOffColor    [UIColor colorWithWhite: 0.9 alpha:1.0]
-	#define kSwitchTrackContrastColor [UIColor whiteColor]
+	//Appearance Defaults - Colors
+	//Track Colors
+	#define kDefaultTrackOnColor     [UIColor colorWithRed:83/255.0 green: 214/255.0 blue: 105/255.0 alpha: 1]
+	#define kDefaultTrackOffColor    [UIColor colorWithWhite: 0.9 alpha:1.0]
+	#define kDefaultTrackContrastColor [UIColor whiteColor]
 
-	#define kDefaultSwitchBorderWidth 2.0
+	//Thumb Colors
+	#define kDefaultThumbTintColor [UIColor whiteColor]
+	#define kDefaultThumbBorderColor [UIColor colorWithWhite: 0.9 alpha:1.0]
+
+	//Appearance - Layout
+
 	//Size of knob with respect to the control - Must be a multiple of 2
 	#define kKnobOffset 2.0
-	#define kKnobTrackingGrowthRatio 1.2
+	#define kKnobTrackingGrowthRatio 1.2                //Amount to grow the thumb on press down
 
-	#define kDefaultAnimationScaleLength 0.10
-	#define kDefaultAnimationSlideLength 0.20
-	#define kDefaultAnimationThumbGrowLength 0.20
+	#define kDefaultPanActivationThreshold 0.7                    //Number between 0.0 - 1.0 describing how far user must drag before initiating the switch
 
-	#define kSwitchTrackContrastViewShrinkFactor 0.00
+	//Appearance - Animations
+	#define kDefaultAnimationScaleLength 0.10           //Length of time for the thumb to grow on press down
+	#define kDefaultAnimationSlideLength 0.25           //Length of time to slide the thumb from left/right to right/left
+
+	#define kSwitchTrackContrastViewShrinkFactor 0.00   
 
 
 
