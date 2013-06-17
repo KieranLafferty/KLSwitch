@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="2">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -12,67 +12,34 @@
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oqd-MU-Xkf" customClass="KLSwitch">
+                            <view contentMode="scaleToFill" id="oqd-MU-Xkf" customClass="KLSwitch">
+                                <rect key="frame" x="128" y="122" width="64" height="40"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" type="user" id="Wbo-Zb-uJq"/>
-                                </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZeY-0U-SGh" customClass="KLSwitch">
+                            <view contentMode="scaleToFill" id="ZeY-0U-SGh" customClass="KLSwitch">
+                                <rect key="frame" x="119" y="170" width="82" height="50"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" type="user" id="LVq-tk-ruZ"/>
-                                </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K8X-fB-6v4" customClass="KLSwitch">
+                            <view contentMode="scaleToFill" id="K8X-fB-6v4" customClass="KLSwitch">
+                                <rect key="frame" x="111" y="228" width="98" height="60"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" type="user" id="D8e-Qz-0PM"/>
-                                </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HQT-dA-FN4" customClass="KLSwitch">
+                            <view contentMode="scaleToFill" id="HQT-dA-FN4" customClass="KLSwitch">
+                                <rect key="frame" x="95" y="296" width="130" height="80"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="80" type="user" id="Ose-6D-N1a"/>
-                                </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fHW-zE-9rl" customClass="KLSwitch">
+                            <view contentMode="scaleToFill" id="fHW-zE-9rl" customClass="KLSwitch">
+                                <rect key="frame" x="135" y="83" width="50" height="31"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="31" type="user" id="g1s-ho-8ft"/>
-                                </constraints>
                             </view>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="KLSwitch" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JGx-yd-gRw">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="65" id="Yep-KE-Tsw"/>
-                                    <constraint firstAttribute="width" constant="186" id="jFz-vX-KQL"/>
-                                </constraints>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="KLSwitch" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JGx-yd-gRw">
+                                <rect key="frame" x="67" y="10" width="186" height="65"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="27"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="oqd-MU-Xkf" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="128" id="1aL-hY-Est"/>
-                            <constraint firstItem="oqd-MU-Xkf" firstAttribute="centerX" secondItem="fHW-zE-9rl" secondAttribute="centerX" type="default" id="2th-HP-u0V"/>
-                            <constraint firstItem="JGx-yd-gRw" firstAttribute="top" secondItem="3" secondAttribute="top" constant="10" id="5yc-IT-NA7"/>
-                            <constraint firstItem="HQT-dA-FN4" firstAttribute="centerX" secondItem="K8X-fB-6v4" secondAttribute="centerX" type="default" id="78F-Mw-H1B"/>
-                            <constraint firstItem="ZeY-0U-SGh" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="119" id="7hZ-xY-GPY"/>
-                            <constraint firstItem="K8X-fB-6v4" firstAttribute="top" secondItem="ZeY-0U-SGh" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="Bu4-zt-VPw"/>
-                            <constraint firstItem="oqd-MU-Xkf" firstAttribute="top" secondItem="fHW-zE-9rl" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="FDk-rf-vFg"/>
-                            <constraint firstItem="K8X-fB-6v4" firstAttribute="centerX" secondItem="ZeY-0U-SGh" secondAttribute="centerX" type="default" id="M3z-ae-dja"/>
-                            <constraint firstItem="JGx-yd-gRw" firstAttribute="top" relation="greaterThanOrEqual" secondItem="3" secondAttribute="top" constant="10" type="user" id="T4K-LD-STY"/>
-                            <constraint firstItem="fHW-zE-9rl" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="135" id="UOb-pz-PPR"/>
-                            <constraint firstItem="K8X-fB-6v4" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="111" id="W4p-BB-UjW"/>
-                            <constraint firstItem="HQT-dA-FN4" firstAttribute="top" secondItem="K8X-fB-6v4" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="aCA-AN-PXh"/>
-                            <constraint firstItem="JGx-yd-gRw" firstAttribute="centerX" secondItem="fHW-zE-9rl" secondAttribute="centerX" type="default" id="dtQ-Y6-dL7"/>
-                            <constraint firstItem="HQT-dA-FN4" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="95" id="fRz-sC-tWg"/>
-                            <constraint firstItem="fHW-zE-9rl" firstAttribute="top" secondItem="JGx-yd-gRw" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="iJy-9b-vBi"/>
-                            <constraint firstItem="ZeY-0U-SGh" firstAttribute="top" secondItem="oqd-MU-Xkf" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="iWe-KW-eRN"/>
-                            <constraint firstItem="ZeY-0U-SGh" firstAttribute="centerX" secondItem="oqd-MU-Xkf" secondAttribute="centerX" type="default" id="sHC-3K-31M"/>
-                            <constraint firstItem="JGx-yd-gRw" firstAttribute="centerX" secondItem="3" secondAttribute="centerX" type="default" id="zUj-zg-eyb"/>
-                        </constraints>
                     </view>
                     <connections>
                         <outlet property="bigSwitch" destination="K8X-fB-6v4" id="zeN-11-b2D"/>
@@ -99,9 +66,6 @@
                 <relationship kind="outlet" name="smallSwitch" candidateClass="KLSwitch"/>
                 <relationship kind="outlet" name="smallestSwitch" candidateClass="KLSwitch"/>
             </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

@@ -24,10 +24,10 @@ typedef void(^changeHandler)(BOOL isOn);
 @property(nonatomic, getter=isOn) BOOL on;
 
 //Custom completion block initiated by value change (on/off)
-@property(strong) changeHandler didChangeHandler;
+@property(nonatomic, copy) changeHandler didChangeHandler;
 
-//Appearance attributes for switch
-
+//Percent (0.0 - 1.0) of the control to travel while panning before a switch toggle is activated
+@property(nonatomic, assign) CGFloat panActivationThreshold;
 //Initializers
 - (id)initWithFrame:(CGRect)frame;
 - (id)initWithFrame:(CGRect)frame

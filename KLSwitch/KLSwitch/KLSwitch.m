@@ -24,6 +24,7 @@
 #define kKnobOffset 2.0
 #define kKnobTrackingGrowthRatio 1.2                //Amount to grow the thumb on press down
 
+#define kDefaultPanActivationThreshold 0.7                    //Number between 0.0 - 1.0 describing how far user must drag before initiating the switch
 
 //Appearance - Animations
 #define kDefaultAnimationScaleLength 0.10           //Length of time for the thumb to grow on press down
@@ -76,6 +77,7 @@
     self.thumbTintColor = kDefaultThumbTintColor;
     self.thumbBorderColor = kDefaultThumbBorderColor;
     self.contrastColor = kDefaultThumbTintColor;
+    self.panActivationThreshold = kDefaultPanActivationThreshold;
 }
 -(void) configureSwitch {
     [self initializeDefaults];
@@ -179,9 +181,13 @@
         CGPoint currentTouchLocation = [gesture locationInView: self];
         
         //Once location gets less than 0 or greater than width then toggle and cancel gesture
-        if ((self.isOn && currentTouchLocation.x <= 0)
-            || (!self.isOn && currentTouchLocation.x >= self.frame.size.width)) {
+        CGFloat switchWidth = self.frame.size.width;
+        if ((self.isOn && currentTouchLocation.x <= switchWidth - switchWidth*self.panActivationThreshold)
+            || (!self.isOn && currentTouchLocation.x >= switchWidth*self.panActivationThreshold)) {
+            [gesture setEnabled:NO];
             [self toggleState];
+            [gesture setEnabled:YES];
+
         }
         
         // send off the appropriate actions (not fully tested yet)
