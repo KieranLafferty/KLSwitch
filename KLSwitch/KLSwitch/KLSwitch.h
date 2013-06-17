@@ -24,7 +24,7 @@ typedef void(^changeHandler)(BOOL isOn);
 @property(nonatomic, getter=isOn) BOOL on;
 
 //Custom completion block initiated by value change (on/off)
-@property(nonatomic, copy) changeHandler didChangeHandler;
+@property(strong) changeHandler didChangeHandler;
 
 //Appearance attributes for switch
 
