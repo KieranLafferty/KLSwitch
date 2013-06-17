@@ -29,7 +29,7 @@ Requires ARC
 Via CocoaPods
 Add the following line to your podfile
 
-	pod 'KLSwitch', :git=>'git://github.com/KieranLafferty/KLSwitch.git'
+	pod 'KLSwitch'
 	
 ## Usage ##
 Interface is exactly the same as for the regular UISwitch you know and love (http://developer.apple.com/library/ios/#documentation/uikit/reference/UISwitch_Class/Reference/Reference.html)
