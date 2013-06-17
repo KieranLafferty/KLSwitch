@@ -30,7 +30,7 @@
 #define kDefaultAnimationScaleLength 0.10           //Length of time for the thumb to grow on press down
 #define kDefaultAnimationSlideLength 0.25           //Length of time to slide the thumb from left/right to right/left
 
-#define kSwitchTrackContrastViewShrinkFactor 0.00   
+#define kSwitchTrackContrastViewShrinkFactor 0.0001     //Must be very low btu not 0 or else causes iOS 5 issuess
 
 @interface KLSwitch () <UIGestureRecognizerDelegate>
 @property (nonatomic, strong) KLSwitchTrack* track;
