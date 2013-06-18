@@ -11,13 +11,12 @@
 //NSCoding Keys
 
 #define kCodingOnKey @"on"
-#define kCodingScaleMode @"scaleToFill"
-#define kCodingKeyKey @"key"
-#define kCodingOpaqueKey @"opaque"
-#define kCodingIdKey @"id"
-#define kCodingContentVerticalAlignmentKey @"verticalAlignment"
-#define kCodingOnTintColorKey @"onTintColor"
-
+#define kCodingOnTintColorKey @"onColor"
+#define kCodingOnColorKey @"onTintColor"    //Not implemented
+#define kCodingTintColorKey @"tintColor"
+#define kCodingThumbTintColorKey @"thumbTintColor"
+#define kCodingOnImageKey @"onImage"
+#define kCodingOffImageKey @"offImage"
 
 //Appearance Defaults - Colors
 //Track Colors
@@ -61,18 +60,37 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder: aCoder];
+    
     [aCoder encodeBool: _on
-                forKey:kCodingOnKey];
-    [aCoder encodeBool: _onTintColor
-                forKey:kCodingOnTintColorKey];
+                forKey: kCodingOnKey];
+    
+    [aCoder encodeObject: _onTintColor
+                  forKey: kCodingOnTintColorKey];
+    
+    [aCoder encodeObject: _tintColor
+                  forKey: kCodingTintColorKey];
+    
+    [aCoder encodeObject: _thumbTintColor
+                  forKey: kCodingThumbTintColorKey];
+    
+    [aCoder encodeObject: _onImage
+                  forKey: kCodingOnImageKey];
+    
+    [aCoder encodeObject: _offImage
+                  forKey: kCodingOffImageKey];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super initWithCoder: aDecoder]) {
         
-        _onTintColor = [aDecoder decodeObjectForKey: kCodingOnTintColorKey];
         _on = [aDecoder decodeBoolForKey:kCodingOnKey];
-
+        _onTintColor = [aDecoder decodeObjectForKey: kCodingOnTintColorKey];
+        _tintColor = [aDecoder decodeObjectForKey: kCodingTintColorKey];
+        _thumbTintColor = [aDecoder decodeObjectForKey: kCodingThumbTintColorKey];
+        _onImage = [aDecoder decodeObjectForKey: kCodingOnImageKey];
+        _offImage = [aDecoder decodeObjectForKey: kCodingOffImageKey];
+        _onTintColor = [aDecoder decodeObjectForKey: kCodingOnTintColorKey];
+        
         [self configureSwitch];
 
     }
