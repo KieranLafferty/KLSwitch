@@ -8,6 +8,17 @@
 
 #import "KLSwitch.h"
 
+//NSCoding Keys
+
+#define kCodingOnKey @"on"
+#define kCodingScaleMode @"scaleToFill"
+#define kCodingKeyKey @"key"
+#define kCodingOpaqueKey @"opaque"
+#define kCodingIdKey @"id"
+#define kCodingContentVerticalAlignmentKey @"verticalAlignment"
+#define kCodingOnTintColorKey @"onTintColor"
+
+
 //Appearance Defaults - Colors
 //Track Colors
 #define kDefaultTrackOnColor     [UIColor colorWithRed:83/255.0 green: 214/255.0 blue: 105/255.0 alpha: 1]
@@ -48,9 +59,22 @@
 
 #pragma mark - Initializers
 
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder: aCoder];
+    [aCoder encodeBool: _on
+                forKey:kCodingOnKey];
+    [aCoder encodeBool: _onTintColor
+                forKey:kCodingOnTintColorKey];
+}
+
 - (id)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super initWithCoder: aDecoder]) {
+        
+        _onTintColor = [aDecoder decodeObjectForKey: kCodingOnTintColorKey];
+        _on = [aDecoder decodeBoolForKey:kCodingOnKey];
+
         [self configureSwitch];
+
     }
     return self;
 }
@@ -101,8 +125,8 @@
 	[self addGestureRecognizer:self.panGesture];
     
     //Initialize the switch to off
-    [self setOn:NO
-       animated:NO];
+    [self setOn: _on
+       animated: NO];
 }
 -(void) layoutSubviews {
     [super layoutSubviews];
