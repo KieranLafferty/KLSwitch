@@ -8,8 +8,9 @@
 
 #import "KLSwitch.h"
 
+#define kConstrainsFrameToProportions YES
+#define kHeightWidthRatio 1.6451612903  //Magic number as a result of dividing the height by the width on the default UISwitch size (51/31)
 //NSCoding Keys
-
 #define kCodingOnKey @"on"
 #define kCodingOnTintColorKey @"onColor"
 #define kCodingOnColorKey @"onTintColor"    //Not implemented
@@ -17,6 +18,7 @@
 #define kCodingThumbTintColorKey @"thumbTintColor"
 #define kCodingOnImageKey @"onImage"
 #define kCodingOffImageKey @"offImage"
+#define kCodingConstrainFrameKey @"constrainFrame"
 
 //Appearance Defaults - Colors
 //Track Colors
@@ -78,9 +80,14 @@
     
     [aCoder encodeObject: _offImage
                   forKey: kCodingOffImageKey];
+    
+    [aCoder encodeBool: _shouldConstrainFrame
+                forKey: kCodingConstrainFrameKey];
+    
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
+    [self initializeDefaults];
     if (self = [super initWithCoder: aDecoder]) {
         
         _on = [aDecoder decodeBoolForKey:kCodingOnKey];
@@ -90,6 +97,7 @@
         _onImage = [aDecoder decodeObjectForKey: kCodingOnImageKey];
         _offImage = [aDecoder decodeObjectForKey: kCodingOffImageKey];
         _onTintColor = [aDecoder decodeObjectForKey: kCodingOnTintColorKey];
+        _shouldConstrainFrame = [aDecoder decodeBoolForKey: kCodingConstrainFrameKey];
         
         [self configureSwitch];
 
@@ -111,20 +119,27 @@
     }
     return self;
 }
+-(void) setFrame:(CGRect)frame {
+    if (self.shouldConstrainFrame) {
+        [super setFrame: CGRectMake(frame.origin.x, frame.origin.y, frame.size.height*kHeightWidthRatio, frame.size.height)];
+    }
+    else [super setFrame: frame];
+}
 
 #pragma mark - Defaults and layout/appearance
 
 -(void) initializeDefaults {
-    self.onTintColor = kDefaultTrackOnColor;
-    self.tintColor = kDefaultTrackOffColor;
-    self.thumbTintColor = kDefaultThumbTintColor;
-    self.thumbBorderColor = kDefaultThumbBorderColor;
-    self.contrastColor = kDefaultThumbTintColor;
-    self.panActivationThreshold = kDefaultPanActivationThreshold;
+    _onTintColor = kDefaultTrackOnColor;
+    _tintColor = kDefaultTrackOffColor;
+    _thumbTintColor = kDefaultThumbTintColor;
+    _thumbBorderColor = kDefaultThumbBorderColor;
+    _contrastColor = kDefaultThumbTintColor;
+    _panActivationThreshold = kDefaultPanActivationThreshold;
+    _shouldConstrainFrame = kConstrainsFrameToProportions;
 }
 -(void) configureSwitch {
     [self initializeDefaults];
-    
+ 
     //Configure visual properties of self
     [self setBackgroundColor: [UIColor clearColor]];
     
