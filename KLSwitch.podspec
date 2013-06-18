@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         	= "KLSwitch"
-  s.ios.deployment_target = '4.3'
+  s.ios.deployment_target = '5.0'
   s.version      	= "1.2"
   s.summary      	= "An iOS 7 UISwitch clone that works on iOS 5+."
   s.homepage     	= "http://www.cocoacontrols.com/platforms/ios/controls/klswitch"
