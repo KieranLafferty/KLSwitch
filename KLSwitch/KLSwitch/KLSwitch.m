@@ -21,18 +21,18 @@
 //Appearance Defaults - Colors
 //Track Colors
 #define kDefaultTrackOnColor     [UIColor colorWithRed:83/255.0 green: 214/255.0 blue: 105/255.0 alpha: 1]
-#define kDefaultTrackOffColor    [UIColor colorWithWhite: 0.9 alpha:1.0]
+#define kDefaultTrackOffColor    [UIColor colorWithWhite: 0.9f alpha:1.0f]
 #define kDefaultTrackContrastColor [UIColor whiteColor]
 
 //Thumb Colors
 #define kDefaultThumbTintColor [UIColor whiteColor]
-#define kDefaultThumbBorderColor [UIColor colorWithWhite: 0.9 alpha:1.0]
+#define kDefaultThumbBorderColor [UIColor colorWithWhite: 0.9f alpha:1.0f]
 
 //Appearance - Layout
 
 //Size of knob with respect to the control - Must be a multiple of 2
 #define kKnobOffset 2.0
-#define kKnobTrackingGrowthRatio 1.2                //Amount to grow the thumb on press down
+#define kKnobTrackingGrowthRatio 1.2f                //Amount to grow the thumb on press down
 
 #define kDefaultPanActivationThreshold 0.7                    //Number between 0.0 - 1.0 describing how far user must drag before initiating the switch
 
@@ -40,7 +40,7 @@
 #define kDefaultAnimationSlideLength 0.25           //Length of time to slide the thumb from left/right to right/left
 #define kDefaultAnimationScaleLength 0.20           //Length of time for the thumb to grow on press down
 
-#define kSwitchTrackContrastViewShrinkFactor 0.0001     //Must be very low btu not 0 or else causes iOS 5 issuess
+#define kSwitchTrackContrastViewShrinkFactor 0.0001f     //Must be very low btu not 0 or else causes iOS 5 issuess
 
 @interface KLSwitch () <UIGestureRecognizerDelegate>
 @property (nonatomic, strong) KLSwitchTrack* track;
@@ -197,13 +197,13 @@
     [self.thumb setBackgroundColor: [UIColor whiteColor]];
     
     //Make the knob a circle and add a shadow
-    CGFloat roundedCornerRadius = self.thumb.frame.size.height/2.0;
+    CGFloat roundedCornerRadius = self.thumb.frame.size.height/2.0f;
     [self.thumb.layer setBorderWidth: 0.5];
     [self.thumb.layer setBorderColor: [self.thumbBorderColor CGColor]];
     [self.thumb.layer setCornerRadius: roundedCornerRadius];
     [self.thumb.layer setShadowColor: [[UIColor grayColor] CGColor]];
     [self.thumb.layer setShadowOffset: CGSizeMake(0, 4)];
-    [self.thumb.layer setShadowOpacity: 0.60];
+    [self.thumb.layer setShadowOpacity: 0.60f];
     [self.thumb.layer setShadowRadius: 1.0];
 }
 
@@ -313,7 +313,7 @@
 -(void) setIsTracking:(BOOL)isTracking
              animated:(BOOL) animated {
     [UIView animateWithDuration: kDefaultAnimationScaleLength
-                          delay: abs(kDefaultAnimationSlideLength - kDefaultAnimationScaleLength)
+                          delay: fabs(kDefaultAnimationSlideLength - kDefaultAnimationScaleLength)
                         options: UIViewAnimationOptionCurveEaseOut
                      animations: ^{
                          [self setIsTracking: isTracking];
@@ -325,8 +325,8 @@
 }
 -(CGRect) trackingFrameForSwitch:(KLSwitch*) parentSwitch {
     //Round the scaled knob height to a multiple of 2
-    CGFloat knobRadius = parentSwitch.bounds.size.height - roundf(kKnobOffset/2.0) * 2.0;
-    CGFloat knobOffset = (parentSwitch.bounds.size.height - knobRadius)/2.0;
+    CGFloat knobRadius = parentSwitch.bounds.size.height - roundf(kKnobOffset/2.0f) * 2.0f;
+    CGFloat knobOffset = (parentSwitch.bounds.size.height - knobRadius)/2.0f;
     
     CGFloat knobWidth = knobRadius * kKnobTrackingGrowthRatio;
     CGFloat knobHeight = knobRadius;
@@ -340,8 +340,8 @@
 }
 -(CGRect) frameForCurrentStateForSwitch:(KLSwitch*) parentSwitch {
     //Round the scaled knob height to a multiple of 2
-    CGFloat knobRadius = parentSwitch.bounds.size.height - roundf(kKnobOffset/2.0) * 2.0;
-    CGFloat knobOffset = (parentSwitch.bounds.size.height - knobRadius)/2.0;
+    CGFloat knobRadius = parentSwitch.bounds.size.height - roundf(kKnobOffset/2.0f) * 2.0f;
+    CGFloat knobOffset = (parentSwitch.bounds.size.height - knobRadius)/2.0f;
     
     if (parentSwitch.isOn) {
         return CGRectMake(parentSwitch.frame.size.width - knobRadius - knobOffset, knobOffset, knobRadius, knobRadius);
@@ -368,7 +368,7 @@
         [_contrastView setBackgroundColor: contrastColor];
         [_contrastView setCenter: self.center];
         
-        CGFloat cornerRadius = frame.size.height/2.0;
+        CGFloat cornerRadius = frame.size.height/2.0f;
         [self.layer setCornerRadius: cornerRadius];
         [_contrastView.layer setCornerRadius: cornerRadius];
         [self.layer setBorderWidth: 1.5];
