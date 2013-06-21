@@ -31,6 +31,7 @@ typedef void(^changeHandler)(BOOL isOn);
 
 //Percent (0.0 - 1.0) of the control to travel while panning before a switch toggle is activated
 @property(nonatomic, assign) CGFloat panActivationThreshold;
+@property(nonatomic, assign) BOOL shouldConstrainFrame;
 //Initializers
 - (id)initWithFrame:(CGRect)frame;
 - (id)initWithFrame:(CGRect)frame
