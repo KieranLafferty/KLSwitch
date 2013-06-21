@@ -43,6 +43,7 @@ Added an event handler block to recieve state changes when the switch is toggled
 	}
 	
 Or it can be set using the custom initializer
+	
 	- (id)initWithFrame:(CGRect)frame
 	   didChangeHandler:(changeHandler) didChangeHandler;
 	   
