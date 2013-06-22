@@ -242,13 +242,9 @@
         CGFloat switchWidth = self.frame.size.width;
         if ((self.isOn && currentTouchLocation.x <= switchWidth - switchWidth*self.panActivationThreshold)
             || (!self.isOn && currentTouchLocation.x >= switchWidth*self.panActivationThreshold)) {
-            [gesture setEnabled:NO];
             [self toggleState];
-            [gesture setEnabled:YES];
-
         }
         
-        // send off the appropriate actions (not fully tested yet)
         CGPoint locationOfTouch = [gesture locationInView:self];
         if (CGRectContainsPoint(self.bounds, locationOfTouch))
             [self sendActionsForControlEvents:UIControlEventTouchDragInside];
