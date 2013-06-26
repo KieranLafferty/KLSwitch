@@ -40,9 +40,36 @@
 
 //Appearance - Animations
 #define kDefaultAnimationSlideLength 0.25           //Length of time to slide the thumb from left/right to right/left
-#define kDefaultAnimationScaleLength 0.20           //Length of time for the thumb to grow on press down
+#define kDefaultAnimationScaleLength 0.25           //Length of time for the thumb to grow on press down
 
 #define kSwitchTrackContrastViewShrinkFactor 0.0001f     //Must be very low btu not 0 or else causes iOS 5 issuess
+
+
+@interface KLSwitchKnob : UIView
+-(id) initWithParentSwitch:(KLSwitch*) parentSwitch;
+-(void) setIsTracking:(BOOL) isTracking
+             animated:(BOOL) animated;
+@property (nonatomic, weak) KLSwitch* parentSwitch;
+@property (nonatomic, assign) BOOL isTracking;
+-(CGRect) trackingFrameForSwitch:(KLSwitch*) parentSwitch;
+-(CGRect) frameForCurrentStateForSwitch:(KLSwitch*) parentSwitch;
+@end
+
+@interface KLSwitchTrack : UIView
+@property(nonatomic, getter=isOn) BOOL on;
+@property (nonatomic, strong) UIColor* contrastColor;
+@property (nonatomic, strong) UIColor* onTintColor;
+@property (nonatomic, strong) UIColor* tintColor;
+-(id) initWithFrame:(CGRect)frame
+            onColor:(UIColor*) onColor
+           offColor:(UIColor*) offColor
+      contrastColor:(UIColor*) contrastColor;
+-(void) growContrastView;
+-(void) shrinkContrastView;
+-(void) setOn:(BOOL) on
+     animated:(BOOL) animated;
+@end
+
 
 @interface KLSwitch () <UIGestureRecognizerDelegate>
 @property (nonatomic, strong) KLSwitchTrack* track;
@@ -157,7 +184,7 @@
 	[self.panGesture setDelegate:self];
 	[self addGestureRecognizer:self.panGesture];
     
-    //Initialize the switch to off
+    //Initialize the switch
     [self setOn: _on
        animated: NO];
 }
@@ -167,13 +194,12 @@
         View should be layered as follows : 
      
         TOP 
-            trackingKnob
-            onTrack
-            offTrack
+            thumb
+            track
         BOTTOM
      */
     // Initialization code
-    if (!self.track) {
+    if (!_track) {
         _track = [[KLSwitchTrack alloc] initWithFrame: self.bounds
                                               onColor: self.onTintColor
                                              offColor: self.tintColor
@@ -207,19 +233,20 @@
 }
 - (void)drawRect:(CGRect)rect
 {
+    [super drawRect:rect];
     // Drawing code
     //[self.trackingKnob setTintColor: self.thumbTintColor];
-    [self.thumb setBackgroundColor: [UIColor whiteColor]];
+    [_thumb setBackgroundColor: [UIColor whiteColor]];
     
     //Make the knob a circle and add a shadow
     CGFloat roundedCornerRadius = self.thumb.frame.size.height/2.0f;
-    [self.thumb.layer setBorderWidth: 0.5];
-    [self.thumb.layer setBorderColor: [self.thumbBorderColor CGColor]];
-    [self.thumb.layer setCornerRadius: roundedCornerRadius];
-    [self.thumb.layer setShadowColor: [[UIColor grayColor] CGColor]];
-    [self.thumb.layer setShadowOffset: CGSizeMake(0, 4)];
-    [self.thumb.layer setShadowOpacity: 0.60f];
-    [self.thumb.layer setShadowRadius: 1.0];
+    [_thumb.layer setBorderWidth: 0.5];
+    [_thumb.layer setBorderColor: [self.thumbBorderColor CGColor]];
+    [_thumb.layer setCornerRadius: roundedCornerRadius];
+    [_thumb.layer setShadowColor: [[UIColor grayColor] CGColor]];
+    [_thumb.layer setShadowOffset: CGSizeMake(0, 4)];
+    [_thumb.layer setShadowOpacity: 0.60f];
+    [_thumb.layer setShadowRadius: 1.0];
 }
 
 #pragma mark - UIGestureRecognizer implementations
@@ -232,10 +259,10 @@
     if (gesture.state == UIGestureRecognizerStateBegan) {
         //Grow the thumb horizontally towards center by defined ratio
         [self.thumb setIsTracking: YES
-                                animated: YES];
+                         animated: YES];
     }
     else if (gesture.state == UIGestureRecognizerStateChanged) {
-        //If touch crosses a threshold then toggle the state
+        //If touch crosses the threshold then toggle the state
         CGPoint currentTouchLocation = [gesture locationInView: self];
         
         //Once location gets less than 0 or greater than width then toggle and cancel gesture
@@ -253,7 +280,7 @@
     }
     else  if (gesture.state == UIGestureRecognizerStateEnded) {
         [self.thumb setIsTracking: NO
-                                animated: YES];
+                         animated: YES];
     }
 }
 
@@ -266,15 +293,14 @@
 
 - (void)setOn:(BOOL)on animated:(BOOL)animated {
     [self setOn: on];
-    [self.thumb setIsTracking:NO
-                            animated: animated];
-    if (animated) {
-        [self.track setOn: on
-                 animated: YES];
-    }
+    [self.thumb setIsTracking: NO
+                     animated: animated];
+    [self.track setOn: on
+             animated: animated];
 }
 - (void) setOn:(BOOL)on {
     _on = on;
+    //Trigger the completion block if exists
     if (self.didChangeHandler) {
         self.didChangeHandler(_on);
     }
@@ -283,15 +309,15 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	[super touchesBegan:touches withEvent:event];
-    [self.thumb setIsTracking:YES animated: YES];
-
+    //Grow the thumb
+    [self.thumb setIsTracking: YES
+                     animated: YES];
     [self sendActionsForControlEvents:UIControlEventTouchDown];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	[super touchesEnded:touches withEvent:event];
-    [self.thumb setIsTracking:NO animated:YES];
 	[self sendActionsForControlEvents:UIControlEventTouchUpInside];
 }
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
