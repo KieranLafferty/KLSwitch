@@ -31,9 +31,6 @@ typedef void(^changeHandler)(BOOL isOn);
 //Custom completion block initiated by value change (on/off)
 @property(nonatomic, copy) changeHandler didChangeHandler;
 
-//Percent (0.0 - 1.0) of the control to travel while panning before a switch toggle is activated
-@property(nonatomic, assign) CGFloat panActivationThreshold;
-
 //Set to true if you want to maintain 51x31 proportions, false if you want to set the frame to anything
 @property(nonatomic, assign) BOOL shouldConstrainFrame;
 

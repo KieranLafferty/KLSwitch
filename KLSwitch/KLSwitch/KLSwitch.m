@@ -33,26 +33,17 @@
 //Appearance - Layout
 
 //Size of knob with respect to the control - Must be a multiple of 2
-#define kKnobOffset 2.0
+#define kKnobOffset 1.0
 #define kKnobTrackingGrowthRatio 1.2f                //Amount to grow the thumb on press down
 
-#define kDefaultPanActivationThreshold 0.7                    //Number between 0.0 - 1.0 describing how far user must drag before initiating the switch
-
 //Appearance - Animations
-#define kDefaultAnimationSlideLength 0.25           //Length of time to slide the thumb from left/right to right/left
-#define kDefaultAnimationScaleLength 0.25           //Length of time for the thumb to grow on press down
+#define kDefaultAnimationLength 0.3           //Length of time to animate
 
 #define kSwitchTrackContrastViewShrinkFactor 0.0001f     //Must be very low btu not 0 or else causes iOS 5 issuess
 
 
 @interface KLSwitchKnob : UIView
--(id) initWithParentSwitch:(KLSwitch*) parentSwitch;
--(void) setIsTracking:(BOOL) isTracking
-             animated:(BOOL) animated;
-@property (nonatomic, weak) KLSwitch* parentSwitch;
 @property (nonatomic, assign) BOOL isTracking;
--(CGRect) trackingFrameForSwitch:(KLSwitch*) parentSwitch;
--(CGRect) frameForCurrentStateForSwitch:(KLSwitch*) parentSwitch;
 @end
 
 @interface KLSwitchTrack : UIView
@@ -66,8 +57,6 @@
       contrastColor:(UIColor*) contrastColor;
 -(void) growContrastView;
 -(void) shrinkContrastView;
--(void) setOn:(BOOL) on
-     animated:(BOOL) animated;
 @end
 
 
@@ -81,6 +70,7 @@
 -(void) configureSwitch;
 -(void) initializeDefaults;
 -(void) toggleState;
+
 @end
 
 @implementation KLSwitch
@@ -155,13 +145,29 @@
 
 #pragma mark - Defaults and layout/appearance
 
+- (void)drawRect:(CGRect)rect
+{
+    [super drawRect:rect];
+    // Drawing code
+    //[self.trackingKnob setTintColor: self.thumbTintColor];
+    [_thumb setBackgroundColor: [UIColor whiteColor]];
+    
+    //Make the knob a circle and add a shadow
+    CGFloat roundedCornerRadius = self.thumb.frame.size.height/2.0f;
+    [_thumb.layer setBorderWidth: 0.5];
+    [_thumb.layer setBorderColor: [self.thumbBorderColor CGColor]];
+    [_thumb.layer setCornerRadius: roundedCornerRadius];
+    [_thumb.layer setShadowColor: [[UIColor grayColor] CGColor]];
+    [_thumb.layer setShadowOffset: CGSizeMake(0, 4)];
+    [_thumb.layer setShadowOpacity: 0.60f];
+    [_thumb.layer setShadowRadius: 1.0];
+}
 -(void) initializeDefaults {
     _onTintColor = kDefaultTrackOnColor;
     _tintColor = kDefaultTrackOffColor;
     _thumbTintColor = kDefaultThumbTintColor;
     _thumbBorderColor = kDefaultThumbBorderColor;
     _contrastColor = kDefaultThumbTintColor;
-    _panActivationThreshold = kDefaultPanActivationThreshold;
     _shouldConstrainFrame = kConstrainsFrameToProportions;
 }
 -(void) configureSwitch {
@@ -184,9 +190,6 @@
 	[self.panGesture setDelegate:self];
 	[self addGestureRecognizer:self.panGesture];
     
-    //Initialize the switch
-    [self setOn: _on
-       animated: NO];
 }
 -(void) layoutSubviews {
     [super layoutSubviews];
@@ -199,21 +202,21 @@
         BOTTOM
      */
     // Initialization code
+    CGFloat controlHeight = self.bounds.size.height;
     if (!_track) {
         _track = [[KLSwitchTrack alloc] initWithFrame: self.bounds
                                               onColor: self.onTintColor
                                              offColor: self.tintColor
                                         contrastColor: self.contrastColor];
-        [_track setOn: self.isOn
-             animated: NO];
+        [_track setOn: _on];
         [self addSubview: self.track];
     }
     if (!_thumb) {
-        _thumb = [[KLSwitchKnob alloc] initWithParentSwitch: self];
-        [_thumb setParentSwitch: self];
-        [_thumb setBackgroundColor: self.thumbTintColor];
+        CGFloat thumbRadius = controlHeight - 2*kKnobOffset;
+        _thumb = [[KLSwitchKnob alloc] initWithFrame: CGRectMake(kKnobOffset, kKnobOffset, thumbRadius, thumbRadius)];
         [self addSubview: _thumb];
     }
+    [self setOn: _on];
 }
 -(void) setOnTintColor:(UIColor *)onTintColor {
     _onTintColor = onTintColor;
@@ -231,22 +234,35 @@
     _thumbBorderColor = thumbBorderColor;
     [self.thumb.layer setBorderColor: [_thumbBorderColor CGColor]];
 }
-- (void)drawRect:(CGRect)rect
-{
-    [super drawRect:rect];
-    // Drawing code
-    //[self.trackingKnob setTintColor: self.thumbTintColor];
-    [_thumb setBackgroundColor: [UIColor whiteColor]];
-    
-    //Make the knob a circle and add a shadow
-    CGFloat roundedCornerRadius = self.thumb.frame.size.height/2.0f;
-    [_thumb.layer setBorderWidth: 0.5];
-    [_thumb.layer setBorderColor: [self.thumbBorderColor CGColor]];
-    [_thumb.layer setCornerRadius: roundedCornerRadius];
-    [_thumb.layer setShadowColor: [[UIColor grayColor] CGColor]];
-    [_thumb.layer setShadowOffset: CGSizeMake(0, 4)];
-    [_thumb.layer setShadowOpacity: 0.60f];
-    [_thumb.layer setShadowRadius: 1.0];
+
+#pragma mark - Animations
+
+-(void) shrinkThumbAnimated:(BOOL) animated {
+    if (animated) {
+        [UIView animateWithDuration: kDefaultAnimationLength
+                         animations: ^{
+            [self shrinkThumbAnimated:NO];
+        }];
+        return;
+    }
+    self.thumb.isTracking = NO;
+    CGRect thumbFrame = self.thumb.frame;
+    thumbFrame.size.width = self.bounds.size.height - 2 * kKnobOffset;
+    [self.thumb setFrame: thumbFrame];
+}
+
+-(void) growThumbAnimated:(BOOL) animated {
+    if (animated) {
+        [UIView animateWithDuration: kDefaultAnimationLength
+                         animations: ^{
+            [self growThumbAnimated:NO];
+        }];
+        return;
+    }
+    self.thumb.isTracking = YES;
+    CGRect thumbFrame = self.thumb.frame;
+    thumbFrame.size.width = thumbFrame.size.width * kKnobTrackingGrowthRatio;
+    [self.thumb setFrame: thumbFrame];
 }
 
 #pragma mark - UIGestureRecognizer implementations
@@ -258,20 +274,17 @@
 -(void) didDrag:(UIPanGestureRecognizer*) gesture {
     if (gesture.state == UIGestureRecognizerStateBegan) {
         //Grow the thumb horizontally towards center by defined ratio
-        [self.thumb setIsTracking: YES
-                         animated: YES];
+        [self growThumbAnimated:YES];
     }
     else if (gesture.state == UIGestureRecognizerStateChanged) {
-        //If touch crosses the threshold then toggle the state
-        CGPoint currentTouchLocation = [gesture locationInView: self];
+        CGPoint currentTouchLocation = [gesture locationInView: self.thumb];
         
-        //Once location gets less than 0 or greater than width then toggle and cancel gesture
-        CGFloat switchWidth = self.frame.size.width;
-        if ((self.isOn && currentTouchLocation.x <= switchWidth - switchWidth*self.panActivationThreshold)
-            || (!self.isOn && currentTouchLocation.x >= switchWidth*self.panActivationThreshold)) {
+        //If the user drags to outside the thumb width then toggle switch
+        if ((self.isOn && currentTouchLocation.x <= 0)
+            || (!self.isOn && currentTouchLocation.x >= self.thumb.bounds.size.width)) {
             [self toggleState];
         }
-        
+    
         CGPoint locationOfTouch = [gesture locationInView:self];
         if (CGRectContainsPoint(self.bounds, locationOfTouch))
             [self sendActionsForControlEvents:UIControlEventTouchDragInside];
@@ -279,8 +292,7 @@
             [self sendActionsForControlEvents:UIControlEventTouchDragOutside];
     }
     else  if (gesture.state == UIGestureRecognizerStateEnded) {
-        [self.thumb setIsTracking: NO
-                         animated: YES];
+        [self shrinkThumbAnimated:YES];
     }
 }
 
@@ -292,26 +304,40 @@
 }
 
 - (void)setOn:(BOOL)on animated:(BOOL)animated {
+    if (animated) {
+        [UIView animateWithDuration: kDefaultAnimationLength
+                         animations:^{
+                             [self setOn: on
+                                animated: NO];
+                         } completion:nil];
+        return;
+    }
     [self setOn: on];
-    [self.thumb setIsTracking: NO
-                     animated: animated];
-    [self.track setOn: on
-             animated: animated];
 }
 - (void) setOn:(BOOL)on {
-    _on = on;
-    //Trigger the completion block if exists
-    if (self.didChangeHandler) {
-        self.didChangeHandler(_on);
+
+    //Perform the state change if different than current
+    if (_on != on) {
+        _on = on;
+        //Trigger the completion block if exists
+        if (self.didChangeHandler) {
+            self.didChangeHandler(_on);
+        }
+        [self sendActionsForControlEvents:UIControlEventValueChanged];
     }
-    [self sendActionsForControlEvents:UIControlEventValueChanged];
+    
+    [self.track setOn: _on];
+    //Configure the new thumb frame and let the class take care of the mapping
+    CGRect newThumbFrame = self.thumb.frame;
+    newThumbFrame.origin.x = on ? self.bounds.size.width : 0;
+    [self.thumb setFrame: newThumbFrame];
 }
+
+#pragma  mark - UIControl subclassed methods
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	[super touchesBegan:touches withEvent:event];
-    //Grow the thumb
-    [self.thumb setIsTracking: YES
-                     animated: YES];
     [self sendActionsForControlEvents:UIControlEventTouchDown];
 }
 
@@ -330,63 +356,22 @@
 
 
 @implementation KLSwitchKnob
--(id) initWithParentSwitch:(KLSwitch*) parentSwitch {
-    if (self = [super initWithFrame: [self frameForCurrentStateForSwitch: parentSwitch]]) {
-        _parentSwitch = parentSwitch;
-    }
-    return self;
-}
--(void) setIsTracking:(BOOL)isTracking {
-    if (isTracking) {
-        //Grow
-        [self setFrame: [self trackingFrameForSwitch: self.parentSwitch]];
-    }
-    else {
-        //Shrink
-        [self setFrame: [self frameForCurrentStateForSwitch: self.parentSwitch]];
-    }
-    _isTracking = isTracking;
-}
--(void) setIsTracking:(BOOL)isTracking
-             animated:(BOOL) animated {
-    [UIView animateWithDuration: kDefaultAnimationScaleLength
-                          delay: fabs(kDefaultAnimationSlideLength - kDefaultAnimationScaleLength)
-                        options: UIViewAnimationOptionCurveEaseOut
-                     animations: ^{
-                         [self setIsTracking: isTracking];
-                     }
-                     completion:^(BOOL finished) {
-         
-                     }];
 
-}
--(CGRect) trackingFrameForSwitch:(KLSwitch*) parentSwitch {
-    //Round the scaled knob height to a multiple of 2
-    CGFloat knobRadius = parentSwitch.bounds.size.height - roundf(kKnobOffset/2.0f) * 2.0f;
-    CGFloat knobOffset = (parentSwitch.bounds.size.height - knobRadius)/2.0f;
+-(void) setFrame:(CGRect)frame {
+    //Intercept the incoming frame and check if i would be drawn out of parent bounds
     
-    CGFloat knobWidth = knobRadius * kKnobTrackingGrowthRatio;
-    CGFloat knobHeight = knobRadius;
+    if (frame.origin.x < kKnobOffset)
+        frame.origin.x = kKnobOffset;
     
-    if (parentSwitch.isOn) {
-        return CGRectMake(parentSwitch.frame.size.width - (knobWidth + knobOffset), knobOffset, knobWidth, knobHeight);
+    if (self.superview) {
+        CGFloat maxHorizontalCoordinate = self.superview.bounds.size.width - kKnobOffset - self.bounds.size.width;
+        if (frame.origin.x > maxHorizontalCoordinate)
+            frame.origin.x = maxHorizontalCoordinate;
     }
-    else {
-        return CGRectMake(knobOffset, knobOffset, knobWidth, knobHeight);
-    }
-}
--(CGRect) frameForCurrentStateForSwitch:(KLSwitch*) parentSwitch {
-    //Round the scaled knob height to a multiple of 2
-    CGFloat knobRadius = parentSwitch.bounds.size.height - roundf(kKnobOffset/2.0f) * 2.0f;
-    CGFloat knobOffset = (parentSwitch.bounds.size.height - knobRadius)/2.0f;
     
-    if (parentSwitch.isOn) {
-        return CGRectMake(parentSwitch.frame.size.width - knobRadius - knobOffset, knobOffset, knobRadius, knobRadius);
-    }
-    else {
-        return CGRectMake(knobOffset, knobOffset, knobRadius, knobRadius);
-    }
+    [super setFrame: frame];
 }
+
 @end
 
 @interface KLSwitchTrack ()
@@ -401,16 +386,19 @@
     if (self = [super initWithFrame: frame]) {
         _onTintColor = onColor;
         _tintColor = offColor;
+        
+        //Configure appearance of self
+        
         _contrastView = [[UIView alloc] initWithFrame:frame];
         [_contrastView setBackgroundColor: contrastColor];
         [_contrastView setCenter: self.center];
+        [self addSubview: _contrastView];
         
         CGFloat cornerRadius = frame.size.height/2.0f;
         [self.layer setCornerRadius: cornerRadius];
         [_contrastView.layer setCornerRadius: cornerRadius];
         [self.layer setBorderWidth: 1.5];
         [self.layer setBorderColor: [kDefaultTrackOffColor CGColor]];
-        [self addSubview: _contrastView];
     }
     return self;
 }
@@ -424,22 +412,6 @@
         [self.layer setBorderColor: [self.tintColor CGColor]];
         [self setBackgroundColor: self.tintColor];
         [self growContrastView];
-    }
-}
--(void) setOn:(BOOL)on animated:(BOOL)animated {
-    if (animated) {
-        //First animate the color switch
-        [UIView animateWithDuration: kDefaultAnimationSlideLength
-                              delay: 0.0
-                            options: UIViewAnimationOptionCurveEaseOut
-                         animations:^{
-                             [self setOn: on
-                                animated: NO];
-                         }
-                         completion:nil];
-    }
-    else {
-        [self setOn: on];
     }
 }
 

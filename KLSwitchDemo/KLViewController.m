@@ -29,7 +29,7 @@
     [self.bigSwitch setOnTintColor: kOrangeColor];
     [self.biggestSwitch setOnTintColor: kRedColor];
     
-    [self.smallestSwitch setOn: YES
+    [self.smallestSwitch setOn: NO
                       animated: YES];
     [self.smallestSwitch setDidChangeHandler:^(BOOL isOn) {
         NSLog(@"Smallest switch changed to %d", isOn);
