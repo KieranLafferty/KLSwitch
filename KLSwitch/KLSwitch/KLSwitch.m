@@ -391,6 +391,7 @@
 
 @interface KLSwitchTrack ()
 @property (nonatomic, strong) UIView* contrastView;
+@property (nonatomic, strong) UIView* onView;
 @end
 @implementation KLSwitchTrack
 
@@ -401,28 +402,40 @@
     if (self = [super initWithFrame: frame]) {
         _onTintColor = onColor;
         _tintColor = offColor;
-        _contrastView = [[UIView alloc] initWithFrame:frame];
-        [_contrastView setBackgroundColor: contrastColor];
-        [_contrastView setCenter: self.center];
+        
         
         CGFloat cornerRadius = frame.size.height/2.0f;
         [self.layer setCornerRadius: cornerRadius];
-        [_contrastView.layer setCornerRadius: cornerRadius];
-        [self.layer setBorderWidth: 1.5];
-        [self.layer setBorderColor: [kDefaultTrackOffColor CGColor]];
+        [self setBackgroundColor: _tintColor];
+        
+        CGRect contrastRect = frame;
+        contrastRect.size.width = frame.size.width - 2*kKnobOffset;
+        contrastRect.size.height = frame.size.height - 2*kKnobOffset;
+        CGFloat contrastRadius = contrastRect.size.height/2.0f;
+
+        _contrastView = [[UIView alloc] initWithFrame:contrastRect];
+        [_contrastView setBackgroundColor: contrastColor];
+        [_contrastView setCenter: self.center];
+        [_contrastView.layer setCornerRadius: contrastRadius];
         [self addSubview: _contrastView];
+
+         
+        _onView = [[UIView alloc] initWithFrame:frame];
+        [_onView setBackgroundColor: _onTintColor];
+        [_onView setCenter: self.center];
+        [_onView.layer setCornerRadius: cornerRadius];
+        [self addSubview: _onView];
+
     }
     return self;
 }
 -(void) setOn:(BOOL)on {
     if (on) {
-        [self.layer setBorderColor: [self.onTintColor CGColor]];
-        [self setBackgroundColor: self.onTintColor];
+        [self.onView setAlpha: 1.0];
         [self shrinkContrastView];
     }
     else {
-        [self.layer setBorderColor: [self.tintColor CGColor]];
-        [self setBackgroundColor: self.tintColor];
+        [self.onView setAlpha: 0.0];
         [self growContrastView];
     }
 }
