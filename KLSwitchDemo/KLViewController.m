@@ -30,31 +30,31 @@
     [self.biggestSwitch setOnTintColor: kRedColor];
     
     [self.smallestSwitch setOn: NO
-                      animated: YES];
+                      animated: NO];
     [self.smallestSwitch setDidChangeHandler:^(BOOL isOn) {
         NSLog(@"Smallest switch changed to %d", isOn);
     }];
     
     [self.smallSwitch setOn: YES
-                   animated: YES];
+                   animated: NO];
     [self.smallSwitch setDidChangeHandler:^(BOOL isOn) {
         NSLog(@"Small switch changed to %d", isOn);
     }];
     
     [self.mediumSwitch setOn: YES
-                    animated: YES];
+                    animated: NO];
     [self.mediumSwitch setDidChangeHandler:^(BOOL isOn) {
         NSLog(@"Medium switch changed to %d", isOn);
     }];
     
     [self.bigSwitch setOn: YES
-                 animated: YES];
+                 animated: NO];
     [self.bigSwitch setDidChangeHandler:^(BOOL isOn) {
         NSLog(@"Big switch changed to %d", isOn);
     }];
     
     [self.biggestSwitch setOn: YES
-                     animated: YES];
+                     animated: NO];
     [self.biggestSwitch setDidChangeHandler:^(BOOL isOn) {
         NSLog(@"Biggest switch changed to %d", isOn);
     }];

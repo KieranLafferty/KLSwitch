@@ -43,7 +43,7 @@
 
 
 @interface KLSwitchKnob : UIView
-@property (nonatomic, assign) BOOL isTracking;
+@property (nonatomic, readonly, assign) BOOL isTracking;
 @end
 
 @interface KLSwitchTrack : UIView
@@ -67,9 +67,38 @@
 //Gesture Recognizers
 @property (nonatomic, strong) UIPanGestureRecognizer* panGesture;
 @property (nonatomic, strong) UITapGestureRecognizer* tapGesture;
+
+
 -(void) configureSwitch;
 -(void) initializeDefaults;
 -(void) toggleState;
+
+//Animation blocks
+
+//Switch
+
+-(void) moveThumbToPositionOn:(BOOL) on;
+-(void) moveThumbToPositionOn:(BOOL) on
+                     animated:(BOOL) animated;
+-(void) moveThumbToPositionOn:(BOOL) on
+                     animated:(BOOL) animated
+                   completion:(void (^)(BOOL finished))completion;
+
+-(void) setTrackOn:(BOOL) on;
+-(void) setTrackOn:(BOOL) on
+          animated:(BOOL) animated;
+-(void) setTrackOn:(BOOL) on
+          animated:(BOOL) animated
+        completion:(void (^)(BOOL finished))completion;
+
+
+-(void) shrinkThumbAnimated:(BOOL) animated;
+-(void) shrinkThumbAnimated:(BOOL) animated
+                 completion:(void (^)(BOOL finished))completion;
+
+-(void) growThumbAnimated:(BOOL) animated;
+-(void) growThumbAnimated:(BOOL) animated
+                 completion:(void (^)(BOOL finished))completion;
 
 @end
 
@@ -189,8 +218,8 @@
                                                               action:@selector(didDrag:)];
 	[self.panGesture setDelegate:self];
 	[self addGestureRecognizer:self.panGesture];
-    
 }
+
 -(void) layoutSubviews {
     [super layoutSubviews];
     /*
@@ -216,7 +245,7 @@
         _thumb = [[KLSwitchKnob alloc] initWithFrame: CGRectMake(kKnobOffset, kKnobOffset, thumbRadius, thumbRadius)];
         [self addSubview: _thumb];
     }
-    [self setOn: _on];
+    [self setOn: _on animated:NO];
 }
 -(void) setOnTintColor:(UIColor *)onTintColor {
     _onTintColor = onTintColor;
@@ -238,33 +267,42 @@
 #pragma mark - Animations
 
 -(void) shrinkThumbAnimated:(BOOL) animated {
+    [self shrinkThumbAnimated: animated
+                   completion: nil];
+}
+-(void) shrinkThumbAnimated:(BOOL) animated
+                 completion:(void (^)(BOOL finished))completion {
     if (animated) {
+        __weak KLSwitch* weakSelf = self;
         [UIView animateWithDuration: kDefaultAnimationLength
                          animations: ^{
-            [self shrinkThumbAnimated:NO];
-        }];
+                             [weakSelf shrinkThumbAnimated:NO];
+                         } completion:completion];
         return;
     }
-    self.thumb.isTracking = NO;
     CGRect thumbFrame = self.thumb.frame;
     thumbFrame.size.width = self.bounds.size.height - 2 * kKnobOffset;
     [self.thumb setFrame: thumbFrame];
 }
 
 -(void) growThumbAnimated:(BOOL) animated {
+    [self growThumbAnimated: animated
+                 completion: nil];
+}
+-(void) growThumbAnimated:(BOOL) animated
+               completion:(void (^)(BOOL finished))completion {
     if (animated) {
+        __weak KLSwitch* weakSelf = self;
         [UIView animateWithDuration: kDefaultAnimationLength
                          animations: ^{
-            [self growThumbAnimated:NO];
-        }];
+                             [weakSelf growThumbAnimated:NO];
+                         }];
         return;
     }
-    self.thumb.isTracking = YES;
     CGRect thumbFrame = self.thumb.frame;
     thumbFrame.size.width = thumbFrame.size.width * kKnobTrackingGrowthRatio;
     [self.thumb setFrame: thumbFrame];
 }
-
 #pragma mark - UIGestureRecognizer implementations
 -(void) didTap:(UITapGestureRecognizer*) gesture {
     if (gesture.state == UIGestureRecognizerStateEnded) {
@@ -275,16 +313,15 @@
     if (gesture.state == UIGestureRecognizerStateBegan) {
         //Grow the thumb horizontally towards center by defined ratio
         [self growThumbAnimated:YES];
+
     }
     else if (gesture.state == UIGestureRecognizerStateChanged) {
         CGPoint currentTouchLocation = [gesture locationInView: self.thumb];
-        
-        //If the user drags to outside the thumb width then toggle switch
+    
         if ((self.isOn && currentTouchLocation.x <= 0)
             || (!self.isOn && currentTouchLocation.x >= self.thumb.bounds.size.width)) {
             [self toggleState];
-        }
-    
+        }        
         CGPoint locationOfTouch = [gesture locationInView:self];
         if (CGRectContainsPoint(self.bounds, locationOfTouch))
             [self sendActionsForControlEvents:UIControlEventTouchDragInside];
@@ -293,6 +330,55 @@
     }
     else  if (gesture.state == UIGestureRecognizerStateEnded) {
         [self shrinkThumbAnimated:YES];
+
+    }
+}
+
+-(void) setTrackOn:(BOOL) on {
+    [self.track setOn: on];
+}
+-(void) setTrackOn:(BOOL) on
+          animated:(BOOL) animated {
+    [self setTrackOn:on
+            animated:animated
+          completion:nil];
+}
+-(void) setTrackOn:(BOOL) on
+          animated:(BOOL) animated
+        completion:(void (^)(BOOL finished))completion {
+    if (animated) {
+        [UIView animateWithDuration: kDefaultAnimationLength
+                         animations: ^{
+            [self setTrackOn: on];
+        } completion: completion];
+    }
+    else [self setTrackOn: on];
+}
+
+-(void) moveThumbToPositionOn:(BOOL) on {
+    CGRect newThumbFrame = self.thumb.frame;
+    newThumbFrame.origin.x = on ? self.bounds.size.width : 0;
+    [self.thumb setFrame: newThumbFrame];
+}
+
+-(void) moveThumbToPositionOn:(BOOL) on
+                     animated:(BOOL)animated {
+    [self moveThumbToPositionOn:on
+                       animated:animated
+                     completion:nil];
+}
+-(void) moveThumbToPositionOn:(BOOL) on
+                     animated:(BOOL)animated
+                   completion:(void (^)(BOOL finished))completion {
+    
+    if (animated) {
+        __weak KLSwitch* weakSelf = self;
+        [UIView animateWithDuration:kDefaultAnimationLength animations:^{
+            [weakSelf moveThumbToPositionOn: on];
+        } completion: completion];
+    }
+    else {
+        [self moveThumbToPositionOn: on];
     }
 }
 
@@ -305,18 +391,15 @@
 
 - (void)setOn:(BOOL)on animated:(BOOL)animated {
     if (animated) {
-        [UIView animateWithDuration: kDefaultAnimationLength
-                         animations:^{
-                             [self setOn: on
-                                animated: NO];
-                         } completion:nil];
-        return;
+        
+        [self moveThumbToPositionOn:on
+                           animated:animated];
+        [self setTrackOn:on
+                animated:animated];
     }
-    [self setOn: on];
-}
-- (void) setOn:(BOOL)on {
-
-    //Perform the state change if different than current
+    if (!on) {
+        [self.track shrinkContrastView];
+    }
     if (_on != on) {
         _on = on;
         //Trigger the completion block if exists
@@ -325,12 +408,11 @@
         }
         [self sendActionsForControlEvents:UIControlEventValueChanged];
     }
-    
-    [self.track setOn: _on];
-    //Configure the new thumb frame and let the class take care of the mapping
-    CGRect newThumbFrame = self.thumb.frame;
-    newThumbFrame.origin.x = on ? self.bounds.size.width : 0;
-    [self.thumb setFrame: newThumbFrame];
+}
+- (void) setOn:(BOOL)on {
+    //Perform the state change if different than current
+    [self setOn: on
+       animated: NO];
 }
 
 #pragma  mark - UIControl subclassed methods
@@ -364,14 +446,16 @@
         frame.origin.x = kKnobOffset;
     
     if (self.superview) {
-        CGFloat maxHorizontalCoordinate = self.superview.bounds.size.width - kKnobOffset - self.bounds.size.width;
+        CGFloat maxHorizontalCoordinate = self.superview.bounds.size.width - 2*kKnobOffset - self.bounds.size.width;
         if (frame.origin.x > maxHorizontalCoordinate)
             frame.origin.x = maxHorizontalCoordinate;
     }
     
     [super setFrame: frame];
 }
-
+-(BOOL) isTracking {
+    return  self.bounds.size.height != self.bounds.size.width;
+}
 @end
 
 @interface KLSwitchTrack ()
@@ -406,12 +490,10 @@
     if (on) {
         [self.layer setBorderColor: [self.onTintColor CGColor]];
         [self setBackgroundColor: self.onTintColor];
-        [self shrinkContrastView];
     }
     else {
         [self.layer setBorderColor: [self.tintColor CGColor]];
         [self setBackgroundColor: self.tintColor];
-        [self growContrastView];
     }
 }
 
