@@ -53,8 +53,6 @@ typedef enum {
 
 @interface KLSwitchThumb : UIView
 @property (nonatomic, assign) BOOL isTracking;
-
-
 -(void) growThumbWithJustification:(KLSwitchThumbJustify) justification;
 -(void) shrinkThumbWithJustification:(KLSwitchThumbJustify) justification;
 @end
