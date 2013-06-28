@@ -189,19 +189,13 @@ typedef enum {
 	[self.panGesture setDelegate:self];
 	[self addGestureRecognizer:self.panGesture];
     
-    //Initialize the switch
-    [self setOn: _on
-       animated: NO];
-}
--(void) layoutSubviews {
-    [super layoutSubviews];
     /*
-        View should be layered as follows : 
+     Subview layering as follows :
      
-        TOP 
-            thumb
-            track
-        BOTTOM
+     TOP
+         thumb
+         track
+     BOTTOM
      */
     // Initialization code
     if (!_track) {
@@ -215,11 +209,10 @@ typedef enum {
     }
     if (!_thumb) {
         _thumb = [[KLSwitchThumb alloc] initWithFrame:CGRectMake(kKnobOffset, kKnobOffset, self.bounds.size.height - 2 * kKnobOffset, self.bounds.size.height - 2 * kKnobOffset)];
-        [_thumb setBackgroundColor: self.thumbTintColor];
         [self addSubview: _thumb];
     }
-    [self setOn:_on animated: NO];
 }
+
 -(void) setOnTintColor:(UIColor *)onTintColor {
     _onTintColor = onTintColor;
     [self.track setOnTintColor: _onTintColor];
@@ -263,7 +256,7 @@ typedef enum {
 -(void) didDrag:(UIPanGestureRecognizer*) gesture {
     if (gesture.state == UIGestureRecognizerStateBegan) {
         //Grow the thumb horizontally towards center by defined ratio
-        [self setIsTracking: YES
+        [self setThumbIsTracking: YES
                    animated: YES];
     }
     else if (gesture.state == UIGestureRecognizerStateChanged) {
@@ -283,7 +276,7 @@ typedef enum {
             [self sendActionsForControlEvents:UIControlEventTouchDragOutside];
     }
     else  if (gesture.state == UIGestureRecognizerStateEnded) {
-        [self setIsTracking: NO
+        [self setThumbIsTracking: NO
                    animated: YES];
     }
 }
@@ -304,7 +297,12 @@ typedef enum {
              animated: animated];
 }
 - (void) setOn:(BOOL)on {
+    //Cancel notification to parent if attempting to set to current state
+    if (_on == on) {
+        return;
+    }
     _on = on;
+    
     //Trigger the completion block if exists
     if (self.didChangeHandler) {
         self.didChangeHandler(_on);
@@ -328,7 +326,7 @@ typedef enum {
 	[self sendActionsForControlEvents:UIControlEventTouchUpOutside];
 }
 
--(void) setIsTracking:(BOOL)isTracking {
+-(void) setThumbIsTracking:(BOOL)isTracking {
     if (isTracking) {
         //Grow
         [self.thumb growThumbWithJustification: self.isOn ? KLSwitchThumbJustifyRight : KLSwitchThumbJustifyLeft];
@@ -339,14 +337,14 @@ typedef enum {
     }
     [self.thumb setIsTracking: isTracking];
 }
--(void) setIsTracking:(BOOL)isTracking
+-(void) setThumbIsTracking:(BOOL)isTracking
              animated:(BOOL) animated {
     __weak id weakSelf = self;
     [UIView animateWithDuration: kDefaultAnimationScaleLength
                           delay: fabs(kDefaultAnimationSlideLength - kDefaultAnimationScaleLength)
                         options: UIViewAnimationOptionCurveEaseOut
                      animations: ^{
-                         [weakSelf setIsTracking: isTracking];
+                         [weakSelf setThumbIsTracking: isTracking];
                      }
                      completion:nil];
 }
@@ -418,7 +416,6 @@ typedef enum {
         _onTintColor = onColor;
         _tintColor = offColor;
         
-        
         CGFloat cornerRadius = frame.size.height/2.0f;
         [self.layer setCornerRadius: cornerRadius];
         [self setBackgroundColor: _tintColor];
@@ -434,7 +431,6 @@ typedef enum {
         [_contrastView.layer setCornerRadius: contrastRadius];
         [self addSubview: _contrastView];
 
-         
         _onView = [[UIView alloc] initWithFrame:frame];
         [_onView setBackgroundColor: _onTintColor];
         [_onView setCenter: self.center];
@@ -472,7 +468,18 @@ typedef enum {
         [self setOn: on];
     }
 }
-
+-(void) setOnTintColor:(UIColor *)onTintColor {
+    _onTintColor = onTintColor;
+    [self.onView setBackgroundColor: _onTintColor];
+}
+-(void) setTintColor:(UIColor *)tintColor {
+    _tintColor = tintColor;
+    [self setBackgroundColor: _tintColor];
+}
+-(void) setContrastColor:(UIColor *)contrastColor {
+    _contrastColor = contrastColor;
+    [self.contrastView setBackgroundColor: _contrastColor];
+}
 -(void) growContrastView {
     //Start out with contrast view small and centered
     [self.contrastView setTransform: CGAffineTransformMakeScale(kSwitchTrackContrastViewShrinkFactor, kSwitchTrackContrastViewShrinkFactor)];
