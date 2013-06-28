@@ -44,15 +44,11 @@
 
 #define kSwitchTrackContrastViewShrinkFactor 0.0001f     //Must be very low btu not 0 or else causes iOS 5 issuess
 
+typedef void (^animationCompletion) (id object);
 
 @interface KLSwitchKnob : UIView
--(id) initWithParentSwitch:(KLSwitch*) parentSwitch;
--(void) setIsTracking:(BOOL) isTracking
-             animated:(BOOL) animated;
-@property (nonatomic, weak) KLSwitch* parentSwitch;
 @property (nonatomic, assign) BOOL isTracking;
--(CGRect) trackingFrameForSwitch:(KLSwitch*) parentSwitch;
--(CGRect) frameForCurrentStateForSwitch:(KLSwitch*) parentSwitch;
+
 @end
 
 @interface KLSwitchTrack : UIView
@@ -209,8 +205,8 @@
         [self addSubview: self.track];
     }
     if (!_thumb) {
-        _thumb = [[KLSwitchKnob alloc] initWithParentSwitch: self];
-        [_thumb setParentSwitch: self];
+        _thumb = [[KLSwitchKnob alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.height, self.bounds.size.height)];
+        [_thumb setFrame: [self thumbFrameForCurrentState]];
         [_thumb setBackgroundColor: self.thumbTintColor];
         [self addSubview: _thumb];
     }
@@ -258,17 +254,17 @@
 -(void) didDrag:(UIPanGestureRecognizer*) gesture {
     if (gesture.state == UIGestureRecognizerStateBegan) {
         //Grow the thumb horizontally towards center by defined ratio
-        [self.thumb setIsTracking: YES
+        [self setIsTracking: YES
                          animated: YES];
     }
     else if (gesture.state == UIGestureRecognizerStateChanged) {
         //If touch crosses the threshold then toggle the state
-        CGPoint currentTouchLocation = [gesture locationInView: self];
+        CGPoint locationInThumb = [gesture locationInView: self.thumb];
         
         //Once location gets less than 0 or greater than width then toggle and cancel gesture
-        CGFloat switchWidth = self.frame.size.width;
-        if ((self.isOn && currentTouchLocation.x <= switchWidth - switchWidth*self.panActivationThreshold)
-            || (!self.isOn && currentTouchLocation.x >= switchWidth*self.panActivationThreshold)) {
+
+        if ((self.isOn && locationInThumb.x <= 0)
+            || (!self.isOn && locationInThumb.x >= self.thumb.bounds.size.width)) {
             [self toggleState];
         }
         
@@ -279,7 +275,7 @@
             [self sendActionsForControlEvents:UIControlEventTouchDragOutside];
     }
     else  if (gesture.state == UIGestureRecognizerStateEnded) {
-        [self.thumb setIsTracking: NO
+        [self setIsTracking: NO
                          animated: YES];
     }
 }
@@ -293,7 +289,7 @@
 
 - (void)setOn:(BOOL)on animated:(BOOL)animated {
     [self setOn: on];
-    [self.thumb setIsTracking: NO
+    [self setIsTracking: NO
                      animated: animated];
     [self.track setOn: on
              animated: animated];
@@ -310,7 +306,7 @@
 {
 	[super touchesBegan:touches withEvent:event];
     //Grow the thumb
-    [self.thumb setIsTracking: YES
+    [self setIsTracking: YES
                      animated: YES];
     [self sendActionsForControlEvents:UIControlEventTouchDown];
 }
@@ -325,27 +321,43 @@
 	[super touchesCancelled:touches withEvent:event];
 	[self sendActionsForControlEvents:UIControlEventTouchUpOutside];
 }
-
-@end
-
-
-@implementation KLSwitchKnob
--(id) initWithParentSwitch:(KLSwitch*) parentSwitch {
-    if (self = [super initWithFrame: [self frameForCurrentStateForSwitch: parentSwitch]]) {
-        _parentSwitch = parentSwitch;
+-(CGRect) thumbTrackingFrameForCurrentState{
+    //Round the scaled knob height to a multiple of 2
+    CGFloat knobRadius = self.bounds.size.height - roundf(kKnobOffset/2.0f) * 2.0f;
+    CGFloat knobOffset = (self.bounds.size.height - knobRadius)/2.0f;
+    
+    CGFloat knobWidth = knobRadius * kKnobTrackingGrowthRatio;
+    CGFloat knobHeight = knobRadius;
+    
+    if (self.isOn) {
+        return CGRectMake(self.frame.size.width - (knobWidth + knobOffset), knobOffset, knobWidth, knobHeight);
     }
-    return self;
+    else {
+        return CGRectMake(knobOffset, knobOffset, knobWidth, knobHeight);
+    }
+}
+-(CGRect) thumbFrameForCurrentState {
+    //Round the scaled knob height to a multiple of 2
+    CGFloat knobRadius = self.bounds.size.height - roundf(kKnobOffset/2.0f) * 2.0f;
+    CGFloat knobOffset = (self.bounds.size.height - knobRadius)/2.0f;
+    
+    if (self.isOn) {
+        return CGRectMake(self.frame.size.width - knobRadius - knobOffset, knobOffset, knobRadius, knobRadius);
+    }
+    else {
+        return CGRectMake(knobOffset, knobOffset, knobRadius, knobRadius);
+    }
 }
 -(void) setIsTracking:(BOOL)isTracking {
     if (isTracking) {
         //Grow
-        [self setFrame: [self trackingFrameForSwitch: self.parentSwitch]];
+        [self.thumb setFrame: [self thumbTrackingFrameForCurrentState]];
     }
     else {
         //Shrink
-        [self setFrame: [self frameForCurrentStateForSwitch: self.parentSwitch]];
+        [self.thumb setFrame: [self thumbFrameForCurrentState]];
     }
-    _isTracking = isTracking;
+    [self.thumb setIsTracking: isTracking];
 }
 -(void) setIsTracking:(BOOL)isTracking
              animated:(BOOL) animated {
@@ -356,37 +368,16 @@
                          [self setIsTracking: isTracking];
                      }
                      completion:^(BOOL finished) {
-         
+                         
                      }];
+    
+}
+@end
 
-}
--(CGRect) trackingFrameForSwitch:(KLSwitch*) parentSwitch {
-    //Round the scaled knob height to a multiple of 2
-    CGFloat knobRadius = parentSwitch.bounds.size.height - roundf(kKnobOffset/2.0f) * 2.0f;
-    CGFloat knobOffset = (parentSwitch.bounds.size.height - knobRadius)/2.0f;
-    
-    CGFloat knobWidth = knobRadius * kKnobTrackingGrowthRatio;
-    CGFloat knobHeight = knobRadius;
-    
-    if (parentSwitch.isOn) {
-        return CGRectMake(parentSwitch.frame.size.width - (knobWidth + knobOffset), knobOffset, knobWidth, knobHeight);
-    }
-    else {
-        return CGRectMake(knobOffset, knobOffset, knobWidth, knobHeight);
-    }
-}
--(CGRect) frameForCurrentStateForSwitch:(KLSwitch*) parentSwitch {
-    //Round the scaled knob height to a multiple of 2
-    CGFloat knobRadius = parentSwitch.bounds.size.height - roundf(kKnobOffset/2.0f) * 2.0f;
-    CGFloat knobOffset = (parentSwitch.bounds.size.height - knobRadius)/2.0f;
-    
-    if (parentSwitch.isOn) {
-        return CGRectMake(parentSwitch.frame.size.width - knobRadius - knobOffset, knobOffset, knobRadius, knobRadius);
-    }
-    else {
-        return CGRectMake(knobOffset, knobOffset, knobRadius, knobRadius);
-    }
-}
+
+@implementation KLSwitchKnob
+
+
 @end
 
 @interface KLSwitchTrack ()
