@@ -5,6 +5,7 @@
 //  Created by Kieran Lafferty on 2013-06-15.
 //  Copyright (c) 2013 Kieran Lafferty. All rights reserved.
 //
+// https://github.com/KieranLafferty/KLSwitch
 
 #import "KLSwitch.h"
 
@@ -13,6 +14,7 @@
 
 //NSCoding Keys
 #define kCodingOnKey @"on"
+#define kCodingLockedKey @"off"
 #define kCodingOnTintColorKey @"onColor"
 #define kCodingOnColorKey @"onTintColor"    //Not implemented
 #define kCodingTintColorKey @"tintColor"
@@ -41,10 +43,10 @@
 
 //Appearance - Animations
 #define kDefaultAnimationSlideLength 0.25f           //Length of time to slide the thumb from left/right to right/left
-#define kDefaultAnimationScaleLength 0.25f           //Length of time for the thumb to grow on press down
-#define kDefaultAnimationContrastResizeLength 0.45f           //Length of time for the thumb to grow on press down
+#define kDefaultAnimationScaleLength 0.15f           //Length of time for the thumb to grow on press down
+#define kDefaultAnimationContrastResizeLength 0.25f           //Length of time for the thumb to grow on press down
 
-#define kSwitchTrackContrastViewShrinkFactor 0.0001f     //Must be very low btu not 0 or else causes iOS 5 issuess
+#define kSwitchTrackContrastViewShrinkFactor 0.0001f     //Must be very low but not 0 or else causes iOS 5 issues
 
 typedef enum {
     KLSwitchThumbJustifyLeft,
@@ -123,6 +125,7 @@ typedef enum {
     if (self = [super initWithCoder: aDecoder]) {
         
         _on = [aDecoder decodeBoolForKey:kCodingOnKey];
+        _locked = [aDecoder decodeBoolForKey:kCodingLockedKey];
         _onTintColor = [aDecoder decodeObjectForKey: kCodingOnTintColorKey];
         _tintColor = [aDecoder decodeObjectForKey: kCodingTintColorKey];
         _thumbTintColor = [aDecoder decodeObjectForKey: kCodingThumbTintColorKey];
@@ -242,9 +245,9 @@ typedef enum {
     [_thumb.layer setBorderColor: [self.thumbBorderColor CGColor]];
     [_thumb.layer setCornerRadius: roundedCornerRadius];
     [_thumb.layer setShadowColor: [[UIColor grayColor] CGColor]];
-    [_thumb.layer setShadowOffset: CGSizeMake(0, 4)];
-    [_thumb.layer setShadowOpacity: 0.60f];
-    [_thumb.layer setShadowRadius: 1.0];
+    [_thumb.layer setShadowOffset: CGSizeMake(0, 3)];
+    [_thumb.layer setShadowOpacity: 0.40f];
+    [_thumb.layer setShadowRadius: 0.8];
 }
 
 #pragma mark - UIGestureRecognizer implementations
@@ -315,6 +318,33 @@ typedef enum {
         self.didChangeHandler(_on);
     }
     [self sendActionsForControlEvents:UIControlEventValueChanged];
+}
+- (void) setLocked:(BOOL)locked {
+    //Cancel notification to parent if attempting to set to current state
+    if (_locked == locked) {
+        return;
+    }
+    _locked = locked;
+
+    UIImageView *lockImageView = (UIImageView *)[_track viewWithTag:LOCK_IMAGE_SUBVIEW];
+    
+    if (!locked && (lockImageView != nil)) {
+        
+        [lockImageView removeFromSuperview];
+        lockImageView = nil;
+        
+    } else if (locked && (lockImageView == nil)) {
+        
+        UIImage *lockImage = [UIImage imageNamed:@"lock-icon.png"];
+        
+        lockImageView = [[UIImageView alloc] initWithImage:lockImage];
+        
+        lockImageView.frame = CGRectMake(7, 8, lockImage.size.width, lockImage.size.height);
+        lockImageView.tag = LOCK_IMAGE_SUBVIEW;
+        
+        [_track addSubview:lockImageView];
+        [_track bringSubviewToFront:lockImageView];
+    }
 }
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {

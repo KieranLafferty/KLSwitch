@@ -5,9 +5,12 @@
 //  Created by Kieran Lafferty on 2013-06-15.
 //  Copyright (c) 2013 Kieran Lafferty. All rights reserved.
 //
+// https://github.com/KieranLafferty/KLSwitch
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
+
+#define LOCK_IMAGE_SUBVIEW 100
 
 typedef void(^changeHandler)(BOOL isOn);
 
@@ -27,6 +30,7 @@ typedef void(^changeHandler)(BOOL isOn);
 
 
 @property(nonatomic, getter=isOn) BOOL on;
+@property(nonatomic, getter=isOn) BOOL locked;
 
 //Custom completion block initiated by value change (on/off)
 @property(nonatomic, copy) changeHandler didChangeHandler;
@@ -44,6 +48,7 @@ typedef void(^changeHandler)(BOOL isOn);
 
 //Events
 - (void)setOn:(BOOL)on animated:(BOOL)animated;
+- (void)setLocked:(BOOL)locked;
 
 @end
 
