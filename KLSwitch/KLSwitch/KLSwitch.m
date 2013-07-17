@@ -294,6 +294,11 @@ typedef enum {
 
 - (void)setOn:(BOOL)on
      animated:(BOOL)animated {
+    //Cancel notification to parent if attempting to set to current state
+    if (_on == on) {
+        return;
+    }
+    
     //Move the thumb to the new position
     [self setThumbOn: on
             animated: animated];
@@ -302,15 +307,6 @@ typedef enum {
     [self.track setOn: on
              animated: animated];
     
-    //Set the switch on to send callbacks 
-    [self setOn: on];
-
-}
-- (void) setOn:(BOOL)on {
-    //Cancel notification to parent if attempting to set to current state
-    if (_on == on) {
-        return;
-    }
     _on = on;
     
     //Trigger the completion block if exists
@@ -319,6 +315,11 @@ typedef enum {
     }
     [self sendActionsForControlEvents:UIControlEventValueChanged];
 }
+
+- (void) setOn:(BOOL)on {
+    [self setOn: on animated: NO];
+}
+
 - (void) setLocked:(BOOL)locked {
     //Cancel notification to parent if attempting to set to current state
     if (_locked == locked) {
