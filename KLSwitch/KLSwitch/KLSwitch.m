@@ -244,6 +244,14 @@ typedef enum {
     [_thumb.layer setBorderWidth: 0.5];
     [_thumb.layer setBorderColor: [self.thumbBorderColor CGColor]];
     [_thumb.layer setCornerRadius: roundedCornerRadius];
+    
+    //Following lines needed to solve laggy scroll performance on older devices (such as iPod Touch 4th Gen)
+    //when using KLSwitch in UITableViewCells.
+    //Reason of laggy performance is setting cornerRadius property.
+    _thumb.layer.shouldRasterize = YES;
+    _thumb.layer.rasterizationScale = [[UIScreen mainScreen] scale];
+    _thumb.layer.masksToBounds = NO;
+    
     [_thumb.layer setShadowColor: [[UIColor grayColor] CGColor]];
     [_thumb.layer setShadowOffset: CGSizeMake(0, 3)];
     [_thumb.layer setShadowOpacity: 0.40f];
@@ -453,6 +461,13 @@ typedef enum {
         
         CGFloat cornerRadius = frame.size.height/2.0f;
         [self.layer setCornerRadius: cornerRadius];
+        //Following lines needed to solve laggy scroll performance on older devices (such as iPod Touch 4th Gen)
+        //when using KLSwitch in UITableViewCells.
+        //Reason of laggy performance is setting cornerRadius property.
+        self.layer.shouldRasterize = YES;
+        self.layer.rasterizationScale = [[UIScreen mainScreen] scale];
+        self.layer.masksToBounds = NO;
+        
         [self setBackgroundColor: _tintColor];
         
         CGRect contrastRect = frame;
@@ -464,12 +479,26 @@ typedef enum {
         [_contrastView setBackgroundColor: contrastColor];
         [_contrastView setCenter: self.center];
         [_contrastView.layer setCornerRadius: contrastRadius];
+        //Following lines needed to solve laggy scroll performance on older devices (such as iPod Touch 4th Gen)
+        //when using KLSwitch in UITableViewCells.
+        //Reason of laggy performance is setting cornerRadius property.
+        _contrastView.layer.shouldRasterize = YES;
+        _contrastView.layer.rasterizationScale = [[UIScreen mainScreen] scale];
+        _contrastView.layer.masksToBounds = NO;
+        
         [self addSubview: _contrastView];
 
         _onView = [[UIView alloc] initWithFrame:frame];
         [_onView setBackgroundColor: _onTintColor];
         [_onView setCenter: self.center];
         [_onView.layer setCornerRadius: cornerRadius];
+        //Following lines needed to solve laggy scroll performance on older devices (such as iPod Touch 4th Gen)
+        //when using KLSwitch in UITableViewCells.
+        //Reason of laggy performance is setting cornerRadius property.
+        _onView.layer.shouldRasterize = YES;
+        _onView.layer.rasterizationScale = [[UIScreen mainScreen] scale];
+        _onView.layer.masksToBounds = NO;
+        
         [self addSubview: _onView];
 
     }
