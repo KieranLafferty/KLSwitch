@@ -72,6 +72,12 @@ typedef enum {
 -(void) shrinkContrastView;
 -(void) setOn:(BOOL) on
      animated:(BOOL) animated;
+
+
+#pragma mark -- setImage
+- (void)addTurnOnImage:(UIImage *)image;
+- (void)addTurnOffImage:(UIImage *)image;
+
 @end
 
 
@@ -402,6 +408,15 @@ typedef enum {
     }
     [self.thumb setFrame: thumbFrame];
 }
+
+#pragma mark: setImage
+- (void)setTurnOnImage:(UIImage *)turnOnImage {
+    [self.track addTurnOnImage:turnOnImage];
+}
+
+- (void)setTurnOffImage:(UIImage *)turnOffImage {
+    [self.track addTurnOffImage:turnOffImage];
+}
 @end
 
 
@@ -531,6 +546,28 @@ typedef enum {
     //Start out with contrast view the size of the track
     [self.contrastView setTransform: CGAffineTransformMakeScale(1, 1)];
     [self.contrastView setTransform: CGAffineTransformMakeScale(kSwitchTrackContrastViewShrinkFactor, kSwitchTrackContrastViewShrinkFactor)];
+}
+
+#pragma mark -- setImage
+- (void)addTurnOnImage:(UIImage *)image {
+    NSInteger turnOnImageViewTag = 12;
+    UIImageView *imageView  = [self.onView viewWithTag:turnOnImageViewTag];
+    if (imageView == nil) {
+        imageView = [[UIImageView alloc] initWithFrame:self.bounds];
+        imageView.tag = turnOnImageViewTag;
+    }
+    imageView.image = image;
+    [self.onView addSubview:imageView];
+}
+- (void)addTurnOffImage:(UIImage *)image {
+    NSInteger turnOffImageViewTag = 12;
+    UIImageView *imageView = [self.contrastView viewWithTag:turnOffImageViewTag];
+    if (imageView == nil) {
+        imageView = [[UIImageView alloc] initWithFrame:self.bounds];
+        imageView.tag = turnOffImageViewTag;
+    }
+    imageView.image = image;
+    [self.contrastView addSubview:imageView];
 }
 
 @end
