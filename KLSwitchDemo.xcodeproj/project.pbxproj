@@ -24,6 +24,12 @@
 		7710F560176DEAF200771BA7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7710F55E176DEAF200771BA7 /* InfoPlist.strings */; };
 		7710F563176DEAF200771BA7 /* KLSwitchDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7710F562176DEAF200771BA7 /* KLSwitchDemoTests.m */; };
 		7710F577176DEB2600771BA7 /* libKLSwitch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7710F572176DEB1700771BA7 /* libKLSwitch.a */; };
+		795340AC1CFC136C007F003A /* switchOff.png in Resources */ = {isa = PBXBuildFile; fileRef = 795340A91CFC136C007F003A /* switchOff.png */; };
+		795340AD1CFC136C007F003A /* switchOff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 795340AA1CFC136C007F003A /* switchOff@2x.png */; };
+		795340AE1CFC136C007F003A /* switchOff@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 795340AB1CFC136C007F003A /* switchOff@3x.png */; };
+		795340B21CFC1373007F003A /* switchOn.png in Resources */ = {isa = PBXBuildFile; fileRef = 795340AF1CFC1373007F003A /* switchOn.png */; };
+		795340B31CFC1373007F003A /* switchOn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 795340B01CFC1373007F003A /* switchOn@2x.png */; };
+		795340B41CFC1373007F003A /* switchOn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 795340B11CFC1373007F003A /* switchOn@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +87,12 @@
 		7710F561176DEAF200771BA7 /* KLSwitchDemoTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KLSwitchDemoTests.h; sourceTree = "<group>"; };
 		7710F562176DEAF200771BA7 /* KLSwitchDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KLSwitchDemoTests.m; sourceTree = "<group>"; };
 		7710F56C176DEB1700771BA7 /* KLSwitch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KLSwitch.xcodeproj; path = KLSwitch/KLSwitch.xcodeproj; sourceTree = SOURCE_ROOT; };
+		795340A91CFC136C007F003A /* switchOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switchOff.png; sourceTree = "<group>"; };
+		795340AA1CFC136C007F003A /* switchOff@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "switchOff@2x.png"; sourceTree = "<group>"; };
+		795340AB1CFC136C007F003A /* switchOff@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "switchOff@3x.png"; sourceTree = "<group>"; };
+		795340AF1CFC1373007F003A /* switchOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switchOn.png; sourceTree = "<group>"; };
+		795340B01CFC1373007F003A /* switchOn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "switchOn@2x.png"; sourceTree = "<group>"; };
+		795340B11CFC1373007F003A /* switchOn@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "switchOn@3x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +174,12 @@
 				7710F543176DEAF200771BA7 /* Default.png */,
 				7710F545176DEAF200771BA7 /* Default@2x.png */,
 				7710F547176DEAF200771BA7 /* Default-568h@2x.png */,
+				795340AF1CFC1373007F003A /* switchOn.png */,
+				795340B01CFC1373007F003A /* switchOn@2x.png */,
+				795340B11CFC1373007F003A /* switchOn@3x.png */,
+				795340A91CFC136C007F003A /* switchOff.png */,
+				795340AA1CFC136C007F003A /* switchOff@2x.png */,
+				795340AB1CFC136C007F003A /* switchOff@3x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -232,7 +250,7 @@
 			name = KLSwitchDemoTests;
 			productName = KLSwitchDemoTests;
 			productReference = 7710F554176DEAF200771BA7 /* KLSwitchDemoTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -241,7 +259,8 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = KL;
-				LastUpgradeCheck = 0460;
+				LastTestingUpgradeCheck = 0730;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Kieran Lafferty";
 			};
 			buildConfigurationList = 7710F529176DEAF200771BA7 /* Build configuration list for PBXProject "KLSwitchDemo" */;
@@ -291,9 +310,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				7710F53C176DEAF200771BA7 /* InfoPlist.strings in Resources */,
+				795340B21CFC1373007F003A /* switchOn.png in Resources */,
 				7710F544176DEAF200771BA7 /* Default.png in Resources */,
+				795340B31CFC1373007F003A /* switchOn@2x.png in Resources */,
 				7710F546176DEAF200771BA7 /* Default@2x.png in Resources */,
+				795340AE1CFC136C007F003A /* switchOff@3x.png in Resources */,
+				795340B41CFC1373007F003A /* switchOn@3x.png in Resources */,
+				795340AC1CFC136C007F003A /* switchOff.png in Resources */,
 				7710F548176DEAF200771BA7 /* Default-568h@2x.png in Resources */,
+				795340AD1CFC136C007F003A /* switchOff@2x.png in Resources */,
 				7710F54B176DEAF200771BA7 /* MainStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -400,6 +425,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -449,6 +475,7 @@
 				GCC_PREFIX_HEADER = "KLSwitchDemo/KLSwitchDemo-Prefix.pch";
 				INFOPLIST_FILE = "KLSwitchDemo/KLSwitchDemo-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "KL.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -461,6 +488,7 @@
 				GCC_PREFIX_HEADER = "KLSwitchDemo/KLSwitchDemo-Prefix.pch";
 				INFOPLIST_FILE = "KLSwitchDemo/KLSwitchDemo-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "KL.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -477,6 +505,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KLSwitchDemo/KLSwitchDemo-Prefix.pch";
 				INFOPLIST_FILE = "KLSwitchDemoTests/KLSwitchDemoTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "KL.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
@@ -494,6 +523,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KLSwitchDemo/KLSwitchDemo-Prefix.pch";
 				INFOPLIST_FILE = "KLSwitchDemoTests/KLSwitchDemoTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "KL.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;

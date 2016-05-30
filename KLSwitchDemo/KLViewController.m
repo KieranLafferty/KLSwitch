@@ -34,6 +34,8 @@
     [self.smallestSwitch setDidChangeHandler:^(BOOL isOn) {
         NSLog(@"Smallest switch changed to %d", isOn);
     }];
+    [self.smallSwitch setTurnOnImage:[UIImage  imageNamed:@"switchOn"]];
+    [self.smallSwitch setTurnOffImage:[UIImage  imageNamed:@"switchOff"]];
     
     [self.smallSwitch setOn: YES
                    animated: YES];
@@ -52,6 +54,8 @@
     [self.bigSwitch setDidChangeHandler:^(BOOL isOn) {
         NSLog(@"Big switch changed to %d", isOn);
     }];
+    [self.bigSwitch setTurnOnImage:[UIImage  imageNamed:@"switchOn"]];
+    [self.bigSwitch setTurnOffImage:[UIImage  imageNamed:@"switchOff"]];
     
     [self.biggestSwitch setOn: YES
                      animated: YES];

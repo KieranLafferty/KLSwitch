@@ -50,5 +50,9 @@ typedef void(^changeHandler)(BOOL isOn);
 - (void)setOn:(BOOL)on animated:(BOOL)animated;
 - (void)setLocked:(BOOL)locked;
 
+#pragma mark: setImage
+- (void)setTurnOnImage:(UIImage *)turnOnImage;
+- (void)setTurnOffImage:(UIImage *)turnOffImage;
+
 @end
 
